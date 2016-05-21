@@ -1,3 +1,15 @@
 input.form-control{
     margin-bottom: 5px;
 }
+
+body{
+    padding-top: 65px;
+}
+
+div.col-xs-3{
+    float:right;
+}
+
+span.glyphicon.glyphicon-ok{
+    margin-right: 20px;
+}
