@@ -7,7 +7,7 @@ body{
 }
 
 div.col-xs-3{
-    float:right;
+    float:left;
 }
 
 p.navbar-text.pull-right{
