@@ -10,6 +10,6 @@ div.col-xs-3{
     float:right;
 }
 
-span.glyphicon.glyphicon-ok{
+p.navbar-text.pull-right{
     margin-right: 20px;
 }
