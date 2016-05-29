@@ -8,7 +8,7 @@
 
     function EditWidgetController($routeParams, WidgetService,$location){
         var vm = this;
-        vm.userId = $routeParams.uid;
+        vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
         vm.widgetId = $routeParams.wgid;

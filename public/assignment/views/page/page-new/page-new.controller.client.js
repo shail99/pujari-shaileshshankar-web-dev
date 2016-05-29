@@ -8,7 +8,7 @@
 
     function NewPageController($routeParams, PageService,$location){
         var vm = this;
-        vm.userId = $routeParams.uid;
+        vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.wid;
         vm.createPage = createPage;
 

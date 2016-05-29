@@ -8,7 +8,7 @@
 
     function EditPageController($routeParams, PageService,$location){
         var vm = this;
-        vm.userId = $routeParams.uid;
+        vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
