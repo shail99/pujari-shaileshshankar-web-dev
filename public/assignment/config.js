@@ -32,14 +32,29 @@
                 controller: "WebsiteListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/new",{
+            .when("/user/:uid/website/new", {
                 templateUrl: "views/website/website-new/website-new.view.client.html",
                 controller: "NewWebsiteController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid",{
+            .when("/user/:uid/website/:wid", {
                 templateUrl: "views/website/website-edit/website-edit.view.client.html",
                 controller: "EditWebsiteController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page", {
+                templateUrl: "views/page/page-list/page-list.view.client.html",
+                controller: "PageListController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/new", {
+                templateUrl: "views/page/page-new/page-new.view.client.html",
+                controller: "NewPageController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid", {
+                templateUrl: "views/page/page-edit/page-edit.view.client.html",
+                controller: "EditPageController",
                 controllerAs: "model"
             })
             .otherwise({

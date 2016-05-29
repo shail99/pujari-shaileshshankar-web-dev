@@ -2,16 +2,16 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="page-list.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-menu-left">
                     </span>
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                Edit Page
+                New Page
             </a>
             <p class="navbar-text pull-right">
-                <a href="page-list.html" class="navbar-link">
+                <a ng-click="model.createPage(pageName)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -22,24 +22,20 @@
 <div class="container">
     <form>
         <div class="form-group">
-            <label for="page-name">Website Name</label>
+            <label for="page-name">Name</label>
             <input type="text"
+                   ng-model="pageName"
                    class="form-control"
                    id="page-name"
-                   placeholder="Blog Post">
+                   placeholder="Page Name">
         </div>
         <div class="form-group">
-            <label for="page-title">Website Description</label>
+            <label for="page-title">Title</label>
             <input type="text"
                    class="form-control"
                    id="page-title"
-                   placeholder="A page to post the blogs of a user">
+                   placeholder="Page Title">
         </div>
-
-        <a class="btn btn-danger btn-block"
-           href="page-list.html">
-            Delete
-        </a>
     </form>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">

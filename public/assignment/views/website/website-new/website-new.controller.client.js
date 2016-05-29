@@ -18,7 +18,7 @@
             };
             var result = WebsiteService.createWebsite(vm.userId, newWebsite);
             if(result){
-                $location.url("/user/"+vm.userId+"/website")
+                $location.url("/user/"+vm.userId+"/website");
             }else{
                 vm.error = "Not able to create a website for the user";
             }
