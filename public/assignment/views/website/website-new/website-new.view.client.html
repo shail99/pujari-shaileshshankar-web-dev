@@ -8,10 +8,10 @@
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                Edit Website
+                New Website
             </a>
             <p class="navbar-text pull-right">
-                <a href="website-list.html" class="navbar-link">
+                <a ng-click="model.createWebsite(websiteName)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -20,40 +20,38 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
     <form>
         <div class="form-group">
-            <label for="websiteName">Website Name</label>
+            <label for="name">Name</label>
             <input type="text"
+                   ng-model="websiteName"
                    class="form-control"
-                   id="websiteName"
-                   placeholder="SiteFly">
+                   id="name"
+                   placeholder="Name">
         </div>
         <div class="form-group">
-            <label for="websiteDescription">Website Description</label>
+            <label for="description">Description</label>
                 <textarea class="form-control"
-                          placeholder="Create a free website in seconds using your Facebook business page."
-                          id="websiteDescription"
+                          placeholder="Description"
+                          id="description"
                           rows="5"></textarea>
         </div>
-
-        <a class="btn btn-danger btn-block"
-           href="website-list.html">
-            Delete
-        </a>
     </form>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="row navbar-text">
             <div class="col-xs-3 text-center">
-                <span class="glyphicon glyphicon-share-alt"></span>
             </div>
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>

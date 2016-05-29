@@ -27,6 +27,21 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/website", {
+                templateUrl: "views/website/website-list/website-list.view.client.html",
+                controller: "WebsiteListController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/new",{
+                templateUrl: "views/website/website-new/website-new.view.client.html",
+                controller: "NewWebsiteController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid",{
+                templateUrl: "views/website/website-edit/website-edit.view.client.html",
+                controller: "EditWebsiteController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });
