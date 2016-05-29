@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="widget-list.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
                     <span class="glyphicon glyphicon-menu-left">
                     </span>
                 </a>
@@ -11,7 +11,7 @@
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a href="widget-list.html" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -20,6 +20,9 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
     <form>
         <div class="form-group">
             <label for="widget-name">Name</label>
@@ -40,6 +43,7 @@
         <div class="form-group">
             <label for="widget-url">URL</label>
             <input type="text"
+                   ng-model="model.widget.url"
                    class="form-control"
                    id="widget-url"
                    placeholder="Image URL"
@@ -48,6 +52,7 @@
         <div class="form-group">
             <label for="widget-width">Width</label>
             <input type="text"
+                   ng-model="model.widget.width"
                    class="form-control"
                    id="widget-width"
                    placeholder="Image Width"
@@ -66,7 +71,7 @@
             Upload Image
         </a>
         <a class="btn btn-danger btn-block"
-           href="widget-list.html">
+           ng-click="model.deleteWidget()">
             Delete
         </a>
     </form>
@@ -81,7 +86,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>

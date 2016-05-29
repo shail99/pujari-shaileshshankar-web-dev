@@ -1,0 +1,14 @@
+<div ng-switch="model.widget.widgetType">
+    <div ng-switch-when="HEADER">
+        <ng-include src="'views/widget/widget-edit/widget-heading.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="IMAGE">
+        <ng-include src="'views/widget/widget-edit/widget-image.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="YOUTUBE">
+        <ng-include src="'views/widget/widget-edit/widget-youtube.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-default>
+        Unable to edit the selected widget
+    </div>
+</div>

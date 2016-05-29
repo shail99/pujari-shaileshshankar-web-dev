@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="widget-list.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
                     <span class="glyphicon glyphicon-menu-left">
                     </span>
                 </a>
@@ -11,7 +11,7 @@
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a href="widget-list.html" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -20,13 +20,16 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
     <form>
         <div class="form-group">
             <label for="widget-name">Name</label>
             <input type="text"
                    class="form-control"
                    id="widget-name"
-                   placeholder="Widget Name"
+                   placeholder="Video Name"
                    value="">
         </div>
         <div class="form-group">
@@ -34,19 +37,29 @@
             <input type="text"
                    class="form-control"
                    id="widget-text"
-                   placeholder="Widget Text"
-                   value="Kohli books RCB's second playoff spot">
+                   placeholder="Video Text"
+                   value="">
         </div>
         <div class="form-group">
-            <label for="widget-size">Size</label>
+            <label for="widget-url">URL</label>
             <input type="text"
+                   ng-model="model.widget.url"
                    class="form-control"
-                   id="widget-size"
-                   placeholder="Widget Size"
-                   value="3">
+                   id="widget-url"
+                   placeholder="Video URL"
+                   value="https://youtu.be/F5vqupbtEGE">
+        </div>
+        <div class="form-group">
+            <label for="widget-width">Width</label>
+            <input type="text"
+                   ng-model="model.widget.width"
+                   class="form-control"
+                   id="widget-width"
+                   placeholder="Video Width"
+                   value="">
         </div>
         <a class="btn btn-danger btn-block"
-           href="widget-list.html">
+           ng-click="model.deleteWidget()">
             Delete
         </a>
     </form>
@@ -61,7 +74,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.userId}}l">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>

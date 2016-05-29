@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="/assignment/widget/widget-list.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget" class="navbar-link">
                     <span class="glyphicon glyphicon-menu-left">
                     </span>
                 </a>
@@ -17,52 +17,52 @@
 <div class="container">
     <ul class="list-group">
         <li class="list-group-item borderless">
-            <a href="widget-heading.html">
+            <a ng-click="model.createWidget('HEADER')">
                 Header
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="#">
+            <a href="">
                 Label
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="#">
+            <a href="">
                 HTML
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="#">
+            <a href="">
                 Text Input
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="#">
+            <a href="">
                 Link
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="#">
+            <a href="">
                 Button
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="widget-image.html">
+            <a ng-click="model.createWidget('IMAGE')">
                 Image
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="widget-youtube.html">
+            <a ng-click="model.createWidget('YOUTUBE')">
                 YouTube
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="#">
+            <a href="">
                 Data Table
             </a>
         </li>
         <li class="list-group-item borderless">
-            <a href="#">
+            <a href="">
                 Repeater
             </a>
         </li>
@@ -70,6 +70,9 @@
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
+        <div ng-if="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
         <div class="row navbar-text">
             <div class="col-xs-3 text-center">
             </div>
@@ -78,7 +81,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
