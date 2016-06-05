@@ -16,7 +16,7 @@
                 .then(function(response){
                     vm.websites = response.data;
                 });
-        };
+        }
         init();
     }
 })();

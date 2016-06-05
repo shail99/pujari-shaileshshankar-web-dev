@@ -16,27 +16,35 @@
         vm.deletePage = deletePage;
 
         function init(){
-            vm.page = PageService.findPageById(vm.pageId);
+            PageService.findPageById(vm.pageId)
+                .then(function(response){
+                    vm.page = response.data;
+                });
         }
         init();
 
         function updatePage(page){
-            var result = PageService.updatePage(vm.pageId, page);
-            if(result){
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            }else{
-                vm.error = "Not able to update the page for website";
-            }
-
+            PageService.updatePage(vm.pageId, page)
+                .then(
+                    function(success)
+                    {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    },
+                    function(error){
+                        vm.error = "Not able to update the page for website";
+                    });
         }
 
         function deletePage(){
-            var result = PageService.deletePage(vm.pageId);
-            if(result){
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            }else{
-                vm.error = "Not able to delete the page for website";
-            }
+            PageService.deletePage(vm.pageId)
+                .then(
+                    function(success){
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    },
+                    function(error){
+                        vm.error = "Not able to delete the page for website";
+                    }
+                );
         }
     }
 })();

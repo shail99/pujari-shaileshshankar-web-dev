@@ -14,16 +14,17 @@
 
         function createPage(pageName){
             var newPage = {
-              _id: new Date().getTime() + "",
               name: pageName
             };
-            var result = PageService.createPage(vm.websiteId, newPage);
-            if(result){
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            }else{
-                vm.error = "Not able to create a page for the user";
-            }
-
+            PageService.createPage(vm.websiteId, newPage)
+                .then(
+                    function(response){
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    },
+                    function(error){
+                        vm.error = "Not able to create a page for the user";
+                    }
+                );
         }
     }
 })();
