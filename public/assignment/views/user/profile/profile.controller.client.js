@@ -14,23 +14,40 @@
         vm.id = $routeParams.userId;
 
         function init(){
-            vm.user = UserService.findUserById(vm.id);
+            UserService
+                .findUserById(vm.id)
+                .then(
+                    function(response){
+                        vm.user = response.data;
+                });
         }
 
         init();
 
         function updateUser(newUser){
-            UserService.updateUser(vm.id,newUser);
+            UserService
+                .updateUser(vm.id,newUser)
+                .then(
+                    function(response){
+                        vm.success = "Updated succesfully";
+                    },
+                    function(error){
+                        vm.error = "Not able to update the user";
+                    }
+                );
         }
 
         function deleteUser(){
-            var result = UserService.deleteUser(vm.id);
-            if(result){
-                $location.url("/login");
-            }else{
-                vm.error = "User cannot be deleted";
-            }
+            UserService
+                .deleteUser()
+                .then(
+                    function(response){
+                        $location.url("/login");
+                    },
+                    function(error){
+                        vm.error = "Unable to delete the user";
+                    }
+                );
         }
-
     }
 })();

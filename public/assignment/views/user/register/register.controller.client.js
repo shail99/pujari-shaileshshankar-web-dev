@@ -11,20 +11,25 @@
         vm.createUser = createUser;
 
         function createUser(username,password1,password2) {
-            if(username !== undefined && password1 === password2){
+            if(username && password1 === password2){
                 var newUser = {
-                    _id: new Date().getTime() + "",
                     username: username,
                     password: password1,
                     firstName: "",
                     lastName: ""
-                }
-                var result = UserService.createUser(newUser);
-                if(result){
-                    $location.url("/user/"+newUser._id);
-                }else{
-                    vm.error = "User not created";
-                }
+                };
+
+                UserService
+                    .createUser(newUser)
+                    .then(
+                        function(response){
+                            var user = response.data;
+                            $location.url("/user/"+user._id);
+                        },
+                        function(error){
+                            vm.error = "User not created";
+                        }
+                    );
             }else{
                 if(username === undefined ) {
                     vm.error = "Please enter a username";
