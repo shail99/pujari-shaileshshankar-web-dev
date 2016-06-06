@@ -97,7 +97,12 @@ module.exports = function(app){
             for (var i in widgets) {
                 if (widgets[i]._id === widgetId) {
                     widgets[i].url = "/uploads/" + filename;
-                    widgets[i].width = width;
+                    if(width){
+                        widgets[i].width = width;
+                    }else{
+                        widgets[i].width = "100%";
+                    }
+
                 }
             }
             response.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
