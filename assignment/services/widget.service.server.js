@@ -92,6 +92,14 @@ module.exports = function(app){
         var destination   = myFile.destination;  // folder where file is saved to
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
+
+        for(var i in widgets){
+            if(widgets[i]._id === widgetId){
+                widgets[i].url = "/uploads/" + filename;
+                widgets[i].width = width;
+            }
+        }
+
         response.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
     }
 
