@@ -1,4 +1,7 @@
-module.exports = function (app) {
+module.exports = function (app, models) {
+
+    var userModel = models.userModel;
+
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
         {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -14,9 +17,19 @@ module.exports = function (app) {
 
     function createUser(request,response){
         var user = request.body;
-        user._id = (new Date()).getTime()+"";
-        users.push(user);
-        response.send(user);
+        userModel
+            .createUser(user)
+            .then(
+                function(user){
+                    response.json(user);
+                },
+                function(error){
+                    response.statusCode(400).send(error);
+                }
+            );
+        //user._id = (new Date()).getTime()+"";
+        //users.push(user);
+        //response.send(user);
     }
 
     function findUserByUsername(username,response){
@@ -54,13 +67,23 @@ module.exports = function (app) {
 
     function findUserById(request,response){
         var id = request.params.userId;
-        for(var i in users) {
+        userModel
+            .findUserById(id)
+            .then(
+                function(user){
+                    response.send(user);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            );
+        /*for(var i in users) {
             if(users[i]._id === id) {
                 response.send(users[i]);
                 return;
             }
         }
-        response.send({});
+        response.send({});*/
     }
 
     function updateUser(request,response){
