@@ -27,9 +27,6 @@ module.exports = function (app, models) {
                     response.statusCode(400).send(error);
                 }
             );
-        //user._id = (new Date()).getTime()+"";
-        //users.push(user);
-        //response.send(user);
     }
 
     function findUserByUsername(username,response){
@@ -77,13 +74,6 @@ module.exports = function (app, models) {
                     response.statusCode(404).send(error);
                 }
             );
-        /*for(var i in users) {
-            if(users[i]._id === id) {
-                response.send(users[i]);
-                return;
-            }
-        }
-        response.send({});*/
     }
 
     function updateUser(request,response){
