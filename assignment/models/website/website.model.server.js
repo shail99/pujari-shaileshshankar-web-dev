@@ -6,7 +6,10 @@ module.exports = function () {
 
     var api = {
         findAllWebsitesForUser: findAllWebsitesForUser,
-        createWebsite: createWebsite
+        createWebsite: createWebsite,
+        findWebsiteById: findWebsiteById,
+        updateWebsite: updateWebsite,
+        deleteWebsite: deleteWebsite
     }
     return api;
 
@@ -17,5 +20,21 @@ module.exports = function () {
     function createWebsite(userId, newWebsite){
         newWebsite._user = userId;
         return Website.create(newWebsite);
+    }
+
+    function findWebsiteById(websiteId){
+        return Website.findById(websiteId);
+    }
+    
+    function updateWebsite(websiteId, website){
+        delete website._id;
+        return Website
+            .update({_id: websiteId},{
+                $set: website
+            })
+    }
+
+    function deleteWebsite(websiteId){
+        return Website.remove({_id: websiteId});
     }
 };

@@ -44,37 +44,46 @@ module.exports = function(app, models){
 
     function findWebsiteById(request,response){
         var websiteId = request.params.websiteId;
-        for(var i in websites){
-            if(websites[i]._id === websiteId){
-                response.send(websites[i]);
-                return;
-            }
-        }
-        response.send({});
+        websiteModel
+            .findWebsiteById(websiteId)
+            .then(
+                function(website){
+                    response.json(website);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
     }
 
     function updateWebsite(request,response){
         var websiteId = request.params.websiteId;
         var newWebsite = request.body;
-        for(var i in websites){
-            if(websites[i]._id === websiteId){
-                websites[i].name = newWebsite.name;
-                response.send(200);
-                return;
-            }
-        }
-        response.send(400);
+
+        websiteModel
+            .updateWebsite(websiteId,newWebsite)
+            .then(
+                function(success){
+                    response.send(200);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
     }
 
     function deleteWebsite(request,response){
         var websiteId = request.params.websiteId;
-        for(var i in websites){
-            if(websites[i]._id === websiteId){
-                websites.splice(i,1);
-                response.send(200);
-                return;
-            }
-        }
-        response.send(400);
+
+        websiteModel
+            .deleteWebsite(websiteId)
+            .then(
+                function(success){
+                    response.send(200);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
     }
 };
