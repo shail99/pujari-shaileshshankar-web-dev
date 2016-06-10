@@ -1,4 +1,6 @@
-module.exports = function(app){
+module.exports = function(app, models){
+
+    var websiteModel = models.websiteModel;
     var websites = [
         { "_id": "123", "name": "Facebook",    "developerId": "456" },
         { "_id": "234", "name": "Tweeter",     "developerId": "456" },
@@ -17,22 +19,27 @@ module.exports = function(app){
     function createWebsite(request,response){
         var newWebsite = request.body;
         var userId = request.params.userId;
-        newWebsite._id = new Date().getTime() + "";
-        newWebsite.developerId = userId;
-        websites.push(newWebsite);
-        response.json(newWebsite);
+        websiteModel
+            .createWebsite(userId,newWebsite)
+            .then(
+                function(website){
+                    response.json(website);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            );
     }
 
     function findAllWebsitesForUser(request,response){
-        var websitesForUser=[];
         var userId = request.params.userId;
-
-        for(var i in websites){
-            if(websites[i].developerId === userId){
-                websitesForUser.push(websites[i]);
-            }
-        }
-        response.send(websitesForUser);
+        websiteModel
+            .findAllWebsitesForUser(userId)
+            .then(
+                function(websites){
+                    response.json(websites);
+                }
+            );
     }
 
     function findWebsiteById(request,response){
