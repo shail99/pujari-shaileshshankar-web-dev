@@ -9,7 +9,11 @@ module.exports = function () {
     var User = mongoose.model("User",UserSchema);
     var api = {
         createUser: createUser,
-        findUserById: findUserById
+        findUserById: findUserById,
+        findUserByCredentials: findUserByCredentials,
+        findUserByUsername: findUserByUsername,
+        updateUser: updateUser,
+        deleteUser: deleteUser
     };
     return api;
     
@@ -19,5 +23,27 @@ module.exports = function () {
 
     function findUserById(userId){
         return User.findById(userId);
+    }
+
+    function findUserByCredentials(username,password) {
+        return User.findOne({username: username, password: password});
+    }
+
+    function findUserByUsername(username) {
+        return User.findOne({username: username});
+    }
+
+    function updateUser(userId, newUser){
+        return User
+            .update({_id: userId},{
+                $set: {
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName
+                }
+            })
+    }
+
+    function deleteUser(userId){
+        return User.remove({_id: userId});
     }
 };

@@ -30,13 +30,16 @@ module.exports = function (app, models) {
     }
 
     function findUserByUsername(username,response){
-        for(var i in users){
-            if(users[i].username === username){
-                response.send(users[i]);
-                return;
-            }
-        }
-        response.send({});
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function(user){
+                    response.json(user);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
     }
 
     function getUsers(request,response){
@@ -53,13 +56,16 @@ module.exports = function (app, models) {
     }
 
     function findUserByCredentials(username,password,response){
-        for(var i in users){
-            if(users[i].username === username && users[i].password === password){
-                response.send(users[i]);
-                return;
-            }
-        }
-        response.send({});
+        userModel
+            .findUserByCredentials(username,password)
+            .then(
+                function (user) {
+                    response.json(user);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
     }
 
     function findUserById(request,response){
@@ -79,26 +85,29 @@ module.exports = function (app, models) {
     function updateUser(request,response){
         var id = request.params.userId;
         var newUser = request.body;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                users[i].firstName = newUser.firstName;
-                users[i].lastName = newUser.lastName;
-                response.send(200);
-                return;
-            }
-        }
-        response.send(400);
+        userModel
+            .updateUser(id,newUser)
+            .then(
+                function(stats){
+                    response.send(200);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            );
     }
 
     function deleteUser(request,response){
         var id = request.params.userId;
-        for(var i in users) {
-            if (users[i]._id === id) {
-                users.splice(i, 1);
-                response.send(200);
-                return;
-            }
-        }
-        response.send(400);
+        userModel
+            .deleteUser(id)
+            .then(
+                function(stats){
+                    response.send(200);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            );
     }
 };
