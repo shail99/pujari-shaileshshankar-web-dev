@@ -1,6 +1,8 @@
-module.exports = function(app){
+module.exports = function(app, models){
     var multer = require('multer'); // npm install multer --save
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
+    var widgetModel = models.widgetModel;
 
     var widgets=[
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -24,32 +26,43 @@ module.exports = function(app){
     function createWidget(request,response){
         var pageId = request.params.pageId;
         var newWidget = request.body;
-        newWidget.pageId = pageId;
-        newWidget._id = new Date().getTime()+"";
-        widgets.push(newWidget);
-        response.json(newWidget);
+        widgetModel
+            .createWidget(pageId, newWidget)
+            .then(
+                function(widget){
+                    response.json(widget);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
+
     }
 
     function findAllWidgetsForPage(request,response){
         var pageId = request.params.pageId;
         var widgetsForPage = [];
-        for (var i in widgets){
-            if(widgets[i].pageId === pageId){
-                widgetsForPage.push(widgets[i]);
-            }
-        }
-        response.json(widgetsForPage);
+        widgetModel
+            .findAllWidgetsForPage(pageId)
+            .then(
+                function(widgets){
+                    response.json(widgets);
+                }
+            );
     }
 
     function findWidgetById(request,response){
         var widgetId = request.params.widgetId;
-        for (var i in widgets){
-            if(widgets[i]._id === widgetId){
-                response.json(widgets[i]);
-                return;
-            }
-        }
-        response.send(400);
+        widgetModel
+            .findWidgetById(widgetId)
+            .then(
+                function(widget){
+                    response.json(widget);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            );
     }
 
     function updateWidget(request,response){
