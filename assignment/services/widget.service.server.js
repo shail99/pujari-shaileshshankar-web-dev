@@ -68,26 +68,30 @@ module.exports = function(app, models){
     function updateWidget(request,response){
         var widgetId = request.params.widgetId;
         var widget = request.body;
-        for (var i in widgets){
-            if(widgets[i]._id === widgetId){
-                widgets[i] = widget;
-                response.send(200);
-                return;
-            }
-        }
-       response.send(400);
+        widgetModel
+            .updateWidget(widgetId,widget)
+            .then(
+                function(success){
+                    response.send(200);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
     }
 
     function deleteWidget(request,response){
         var widgetId = request.params.widgetId;
-        for (var i in widgets){
-            if(widgets[i]._id === widgetId){
-                widgets.splice(i,1);
-                response.send(200);
-                return;
-            }
-        }
-        response.send(400);
+        widgetModel
+            .deleteWidget(widgetId)
+            .then(
+                function(success){
+                    response.send(200);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
     }
 
     function uploadImage(request, response) {
