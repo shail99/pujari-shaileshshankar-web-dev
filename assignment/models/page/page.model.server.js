@@ -19,19 +19,22 @@ module.exports = function () {
     }
 
     function findAllPagesForWebsite(websiteId){
-        return Page.find({"_website": websiteId})
+        return Page.find({_website: websiteId});
     }
 
     function findPageById(pageId){
-
+        return Page.findById({_id: pageId});
     }
 
     function updatePage(pageId, page){
-
+        delete page._id;
+        return Page.update({_id: pageId},{
+            $set: page
+        })
     }
 
     function deletePage(pageId){
-        
+        return Page.remove({_id: pageId});
     }
 
 };

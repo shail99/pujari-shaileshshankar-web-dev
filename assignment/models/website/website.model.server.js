@@ -14,7 +14,7 @@ module.exports = function () {
     return api;
 
     function findAllWebsitesForUser(userId){
-        return Website.find({"_user": userId});
+        return Website.find({_user: userId});
     }
     
     function createWebsite(userId, newWebsite){
