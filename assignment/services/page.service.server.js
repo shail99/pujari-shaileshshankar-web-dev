@@ -30,13 +30,13 @@ module.exports = function(app,models){
 
     function findAllPagesForWebsite(request,response){
         var websiteId = request.params.websiteId;
-        var pagesForUser = [];
-        for(var i in pages){
-            if(pages[i].websiteId === websiteId){
-                pagesForUser.push(pages[i]);
-            }
-        }
-        response.json(pagesForUser);
+        pageModel
+            .findAllPagesForWebsite(websiteId)
+            .then(
+                function(pages){
+                    response.json(pages);
+                }
+            );
     }
 
     function findPageById(request,response) {

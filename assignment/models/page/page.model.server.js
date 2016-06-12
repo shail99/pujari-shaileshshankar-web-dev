@@ -19,7 +19,7 @@ module.exports = function () {
     }
 
     function findAllPagesForWebsite(websiteId){
-
+        return Page.find({"_website": websiteId})
     }
 
     function findPageById(pageId){
