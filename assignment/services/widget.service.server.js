@@ -111,17 +111,31 @@ module.exports = function(app, models){
             var size = myFile.size;
             var mimetype = myFile.mimetype;
 
-            for (var i in widgets) {
-                if (widgets[i]._id === widgetId) {
-                    widgets[i].url = "/uploads/" + filename;
-                    if(width){
-                        widgets[i].width = width;
-                    }else{
-                        widgets[i].width = "100%";
+            widgetModel
+                .findWidgetById(widgetId)
+                .then(
+                    function(widget){
+                        widget.url = "/uploads/" + filename;
+                        if(width){
+                            widget.width = width;
+                        }else{
+                            widget.width = "100%";
+                        }
+                        widgetModel
+                            .updateWidget(widgetId,widget)
+                            .then(
+                                function(success){
+                                    response.send(200);
+                                },
+                                function(error){
+                                    response.statusCode(404).send(error);
+                                }
+                            )
+                    },
+                    function(error){
+                        response.statusCode(404).send(error);
                     }
-
-                }
-            }
+                );
             response.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
         }else{
             response.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
