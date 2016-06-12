@@ -9,6 +9,7 @@ module.exports = function(app, models){
     app.put("/api/widget/:widgetId",updateWidget);
     app.delete("/api/widget/:widgetId",deleteWidget);
     app.post ("/api/uploads", upload.single('myFile'), uploadImage);
+    app.put("/page/:pageId/widget",reorderWidget);
 
     function createWidget(request,response){
         var pageId = request.params.pageId;
@@ -71,6 +72,22 @@ module.exports = function(app, models){
         var widgetId = request.params.widgetId;
         widgetModel
             .deleteWidget(widgetId)
+            .then(
+                function(success){
+                    response.send(200);
+                },
+                function(error){
+                    response.statusCode(404).send(error);
+                }
+            )
+    }
+
+    function reorderWidget(request,response){
+        var pageId = request.params.pageId;
+        var start = parseInt(request.query.start);
+        var end = parseInt(request.query.end);
+        widgetModel
+            .reorderWidget(pageId,start,end)
             .then(
                 function(success){
                     response.send(200);

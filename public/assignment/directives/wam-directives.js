@@ -27,7 +27,8 @@
             templateUrl: "/assignment/views/widget/widget-list/widget-list.html",
             scope:{
                 widgetList: "=data",
-                callback: "&"
+                callback: "&",
+                model: "=model"
             },
             link : linker
         }

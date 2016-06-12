@@ -1,5 +1,5 @@
 <div class="container-fluid" id="widgetList">
-<div ng-repeat="widget in widgetList" class="widget-outer">
+<div ng-repeat="widget in widgetList | orderBy : 'order'" class="widget-outer">
     <div class="widget-properties">
         <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"> </span>

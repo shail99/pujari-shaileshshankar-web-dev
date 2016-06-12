@@ -24,9 +24,17 @@
         }
         init();
 
-        function reorderWidget(start, end){
-            console.log(start);
-            console.log(end);
+        function reorderWidget(index1, index2){
+            WidgetService
+                .reorderWidget(vm.pageId,index1,index2)
+                .then(
+                    function(success){
+                        init();
+                    },
+                    function(error){
+                        vm.error = "Not able to reorder the widgets";
+                    }
+                )
         }
 
         function getSafeHtml(widget) {

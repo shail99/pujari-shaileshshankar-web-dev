@@ -19,7 +19,7 @@ module.exports = function(){
             .find({_page: pageId})
             .then(
                 function (widgets) {
-                    widget.order = widgets.length + 1;
+                    widget.order = widgets.length;
                     return Widget.create(widget);
                 }
             );
@@ -45,6 +45,28 @@ module.exports = function(){
     }
 
     function reorderWidget(pageId, start, end){
-
+        return Widget.find({_page: pageId},function(error,widgets){
+            widgets.forEach(function(widget){
+                if(start > end) {
+                    if(widget.order >= end && widget.order < start) {
+                        widget.order++;
+                        widget.save(function(){});
+                    } else if(widget.order === start) {
+                        widget.order = end;
+                        widget.save(function(){});
+                    }
+                } else {
+                    if(widget.order > start && widget.order <= end) {
+                        widget.order--;
+                        widget.save(function(){});
+                    } else if(widget.order === start) {
+                        widget.order = end;
+                        widget.save(function(){});
+                    }
+                }
+            });
+        });
     }
+    
+    
 };
