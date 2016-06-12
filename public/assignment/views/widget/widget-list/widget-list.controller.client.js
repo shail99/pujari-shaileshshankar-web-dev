@@ -14,17 +14,20 @@
         
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
+        vm.reorderWidget = reorderWidget;
 
         function init(){
             WidgetService.findWidgetsByPageId(vm.pageId)
                 .then(function(response){
                     vm.widgets = response.data;
-                    $("#widgetList").sortable({
-                        axis:"y"
-                    });
                 });
         }
         init();
+
+        function reorderWidget(start, end){
+            console.log(start);
+            console.log(end);
+        }
 
         function getSafeHtml(widget) {
             return $sce.trustAsHtml(widget.text);
