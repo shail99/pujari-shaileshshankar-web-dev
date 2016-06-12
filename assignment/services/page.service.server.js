@@ -1,4 +1,6 @@
-module.exports = function(app){
+module.exports = function(app,models){
+
+    var pageModel = models.pageModel;
     var pages = [
         { "_id": "321", "name": "Post 1", "websiteId": "456" },
         { "_id": "432", "name": "Post 2", "websiteId": "456" },
@@ -12,12 +14,18 @@ module.exports = function(app){
     app.delete("/api/page/:pageId",deletePage);
 
     function createPage(request,response){
-        var page = request.body;
+        var newPage = request.body;
         var websiteId = request.params.websiteId;
-        page._id = new Date().getTime() + "";
-        page.websiteId = websiteId;
-        pages.push(page)
-        response.json(page);
+        pageModel
+            .createPage(websiteId, newPage)
+            .then(
+                function(page){
+                    response.json(page);
+                },
+                function(error){
+                    response.statusCode("404").send(error);
+                }
+            );
     }
 
     function findAllPagesForWebsite(request,response){

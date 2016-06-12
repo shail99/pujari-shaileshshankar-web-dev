@@ -9,8 +9,9 @@ module.exports = function () {
         password: String,
         firstName: String,
         lastName: String,
-        dob: Date,
-        dateCreated: {type: Date, default: Date.now}
+        email: String,
+        dateCreated: {type: Date, default: Date.now},
+        websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Website'}]
     }, {collection: "assignment.user"});
     
     return UserSchema;
