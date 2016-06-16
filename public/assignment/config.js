@@ -10,7 +10,7 @@
     function Config($routeProvider){
         $routeProvider
             .when("/",{
-                redirectTo: "/login"
+                redirectTo: "/index.html"
             })
             .when("/user/:userId/website/:wid/page/:pid/widget/:wgid/flickr",{
                 templateUrl: "views/widget/widget-edit/widget-flickr-search.view.client.html",
