@@ -2,9 +2,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (app, models) {
-
+    
     var userModel = models.userModel;
-
     app.post("/api/user",createUser);
     //app.get("/api/user", getUsers);
     app.post("/api/login",passport.authenticate('local'), login);
