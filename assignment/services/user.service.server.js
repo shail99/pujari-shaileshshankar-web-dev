@@ -2,7 +2,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (app, models) {
-    
+
     var userModel = models.userModel;
     app.post("/api/user",createUser);
     //app.get("/api/user", getUsers);
@@ -10,6 +10,8 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId",findUserById);
     app.put("/api/user/:userId",updateUser);
     app.delete("/api/user/:userId",deleteUser);
+    app.post("/api/logout",logout);
+    app.get("/api/loggedIn", loggedIn);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -29,6 +31,19 @@ module.exports = function (app, models) {
                     if (err) { return done(err); }
                 }
             );
+    }
+
+    function loggedIn(request, response){
+        if(request.isAuthenticated()){
+            response.send(request.user);
+        }else{
+            response.send('0');
+        }
+    }
+
+    function logout(request, response){
+        request.logout();
+        response.send(200);
     }
 
     function login(request, response) {

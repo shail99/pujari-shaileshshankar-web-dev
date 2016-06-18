@@ -14,10 +14,20 @@
             findUserByUsername : findUserByUsername,
             findUserByCredentials : findUserByCredentials,
             updateUser : updateUser,
-            deleteUser : deleteUser
+            deleteUser : deleteUser,
+            logout : logout,
+            loggedIn : loggedIn
         }
 
         return api;
+
+        function logout(){
+            return $http.post("/api/logout");
+        }
+
+        function loggedIn(){
+            return $http.get("/api/loggedIn")
+        }
 
         function login(username,password){
             var user = {
