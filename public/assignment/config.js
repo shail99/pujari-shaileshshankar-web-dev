@@ -27,7 +27,7 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/user/:userId", {
+            .when("/user", {
                 templateUrl: "views/user/profile/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model",
@@ -86,7 +86,7 @@
 
     }
 
-    function checkLoggedIn(UserService, $location, $q){
+    function checkLoggedIn(UserService, $location, $q, $rootScope){
         var deferred = $q.defer();
         UserService
             .loggedIn()
@@ -94,9 +94,11 @@
                 function(response){
                     var user = response.data;
                     if(user == '0'){
+                        $rootScope.currentUser = null;
                         deferred.reject();
                         $location.url("/login");
                     }else{
+                        $rootScope.currentUser = user;
                         deferred.resolve();
                     }
                 },
