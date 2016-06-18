@@ -12,7 +12,7 @@
         vm.deleteUser = deleteUser;
         vm.logout = logout;
 
-        vm.id = $rootScope.currentUser.userId;
+        vm.id = $rootScope.currentUser._id;
 
         function init(){
             UserService
