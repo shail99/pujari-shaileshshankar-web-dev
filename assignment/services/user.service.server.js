@@ -5,6 +5,7 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
+    app.get("/auth/facebook", facebookLogin);
     app.post("/api/user",createUser);
     //app.get("/api/user", getUsers);
     app.post("/api/login",passport.authenticate('local'), login);
@@ -34,6 +35,10 @@ module.exports = function (app, models) {
                     if (err) { return done(err); }
                 }
             );
+    }
+
+    function facebookLogin(request, response){
+        response.send(200);
     }
 
     function loggedIn(request, response){
