@@ -12,6 +12,7 @@ module.exports = function (app, models) {
     app.delete("/api/user/:userId",deleteUser);
     app.post("/api/logout",logout);
     app.get("/api/loggedIn", loggedIn);
+    app.post("/api/register", register);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -65,6 +66,41 @@ module.exports = function (app, models) {
                 },
                 function(err){
                     done(err, null);
+                }
+            );
+    }
+
+    function register(request, response){
+        var user = request.body;
+        userModel
+            .findUserByUsername(user.username)
+            .then(
+                function(user){
+                    if(user){
+                        response.status(400).send("Username already in use");
+                    }else{
+                        return userModel
+                                .createUser(request.body);
+                    }
+                },
+                function(error){
+                    response.status(400).send(error);
+                }
+            )
+            .then(
+                function(user){
+                    if(user){
+                        request.login(user, function(error){
+                            if(error){
+                                response.status(400).send(error);
+                            }else{
+                                response.json(user);
+                            }
+                        })
+                    }
+                },
+                function(error){
+                    response.status(400).send(error);
                 }
             );
     }
