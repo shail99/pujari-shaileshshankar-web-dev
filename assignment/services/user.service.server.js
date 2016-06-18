@@ -16,12 +16,13 @@ module.exports = function (app, models) {
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
+
     function localStrategy(username, password, done) {
         userModel
             .findUserByCredentials(username, password)
             .then(
                 function(user) {
-                    if(user.username === username && user.password === password) {
+                    if(user !== null && user.username === username && user.password === password) {
                         return done(null, user);
                     } else {
                         return done(null, false);
