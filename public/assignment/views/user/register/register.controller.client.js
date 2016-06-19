@@ -25,7 +25,7 @@
                     .then(
                         function(response){
                             var user = response.data;
-                            $location.url("/user/"+user._id);
+                            $location.url("/user/");
                         },
                         function(error){
                             vm.error = error.data;
