@@ -13,8 +13,10 @@
                class="form-control"
                required
                placeholder="username"/>
-        <div ng-show="LoginForm.username.$invalid && LoginForm.$submitted" class="alert alert-danger" role="alert">
-            Please enter a username
+        <div ng-show="LoginForm.username.$invalid && LoginForm.$submitted">
+            <span class="error">
+                Please enter a username
+            </span>
         </div>
         <input name="password"
                id="password"
@@ -23,14 +25,18 @@
                required
                class="form-control"
                placeholder="password"/>
-        <div ng-show="LoginForm.password.$invalid && LoginForm.$submitted" class="alert alert-danger" role="alert">
-            Please enter a password
+        <div ng-show="LoginForm.password.$invalid && LoginForm.$submitted">
+            <span class="error">
+                  Please enter a password
+            </span>
         </div>
-        <button type="submit" ng-click="model.login(username,password,LoginForm)" class="btn btn-primary btn-block">Login</button>
+        <button type="submit" ng-click="model.login(username,password,LoginForm)" class="btn btn-primary btn-block">
+            Login
+        </button>
         <a class="btn btn-success btn-block" href="#/register">Register</a>
         <a href="/auth/facebook" class="btn btn-primary btn-block">
             <span class="fa fa-facebook-official"></span>
             Facebook
         </a>
-        </form>
+    </form>
 </div>

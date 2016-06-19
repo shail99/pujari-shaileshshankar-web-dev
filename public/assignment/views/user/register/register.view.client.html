@@ -13,8 +13,10 @@
                class="form-control"
                required
                placeholder="username"/>
-        <div ng-show="RegisterForm.username.$invalid && RegisterForm.$submitted" class="alert alert-danger" role="alert">
-            Please enter a username
+        <div ng-show="RegisterForm.username.$invalid && RegisterForm.$submitted">
+            <span class="error">
+                Please enter a username
+            </span>
         </div>
         <input type="password"
                name="password"
@@ -23,8 +25,10 @@
                class="form-control"
                required
                placeholder="password"/>
-        <div ng-show="RegisterForm.password.$invalid && RegisterForm.$submitted" class="alert alert-danger" role="alert">
-            Please enter a password
+        <div ng-show="RegisterForm.password.$invalid && RegisterForm.$submitted">
+            <span class="error">
+                Please enter a password
+            </span>
         </div>
         <input type="password"
                name="password1"
@@ -33,13 +37,16 @@
                class="form-control"
                required
                placeholder="verify password"/>
-        <div ng-if="model.passwordError" class="alert alert-danger" role="alert">
-            {{model.passwordError}}
+        <div ng-if="model.passwordError">
+            <span class="error">
+                {{model.passwordError}}
+            </span>
         </div>
 
         <button type="submit"
                 ng-click="model.register(username,password1,password2,RegisterForm)"
-                class="btn btn-primary btn-block">Register</button>
+                class="btn btn-primary btn-block">Register
+        </button>
         <a class="btn btn-danger btn-block" href="#/login">Cancel</a>
     </form>
 </div>

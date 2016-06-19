@@ -32,8 +32,10 @@
                    id="page-name"
                    required
                    placeholder="Blog Post">
-            <div ng-if="model.pageError" class="alert alert-danger" role="alert">
-                {{model.pageError}}
+            <div ng-if="model.pageError">
+                <span class="error">
+                    {{model.pageError}}
+                </span>
             </div>
         </div>
         <div class="form-group">

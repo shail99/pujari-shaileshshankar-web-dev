@@ -21,7 +21,7 @@
                         }
                     });
             }else{
-                vm.error = "There are errors in the form";
+                vm.error = "There are errors in the form!!!";
             }
         }
     }

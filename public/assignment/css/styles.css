@@ -67,3 +67,7 @@ div.widget-properties{
 #widget-name.ng-invalid{
     background-color: beige;
 }
+span.error{
+    color: darkred;
+    vertical-align: middle;
+}

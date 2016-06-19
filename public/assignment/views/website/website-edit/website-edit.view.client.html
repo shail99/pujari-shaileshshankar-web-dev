@@ -32,8 +32,10 @@
                    required
                    id="websiteName"
                    placeholder="SiteFly">
-            <div ng-if="model.websiteError" class="alert alert-danger" role="alert">
-                {{model.websiteError}}
+            <div ng-if="model.websiteError">
+                <span class="error">
+                    {{model.websiteError}}
+                </span>
             </div>
         </div>
         <div class="form-group">

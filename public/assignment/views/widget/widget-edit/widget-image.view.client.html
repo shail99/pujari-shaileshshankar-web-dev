@@ -34,8 +34,10 @@
                    placeholder="Image Name"
                    required
                    value="">
-            <div ng-if="model.widgetError" class="alert alert-danger" role="alert">
-                {{model.widgetError}}
+            <div ng-if="model.widgetError">
+                <span class="error">
+                    {{model.widgetError}}
+                </span>
             </div>
         </div>
         <div class="form-group">

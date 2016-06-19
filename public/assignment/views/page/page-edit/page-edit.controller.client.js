@@ -35,6 +35,7 @@
                         });
             }else{
                 vm.pageError = "Please enter a page name!!!";
+                vm.error = "There are errors in the form!!!";
             }
         }
 

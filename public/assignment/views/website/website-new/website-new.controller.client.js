@@ -26,6 +26,7 @@
                         });
             }else{
                 vm.websiteError = "Please enter a website name!!!";
+                vm.error = "There are errors in the form!!!";
             }
         }
     }

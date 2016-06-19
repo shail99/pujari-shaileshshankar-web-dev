@@ -39,13 +39,13 @@ module.exports = function (app, models) {
             .then(
                 function(user) {
                     if(user && bcrypt.compareSync(password, user.password)) {
-                        return done(null, user);
+                        done(null, user);
                     } else {
-                        return done(null, false);
+                        done(null, false);
                     }
                 },
                 function(err) {
-                    if (err) { return done(err); }
+                    if (err) { done(err); }
                 }
             );
     }

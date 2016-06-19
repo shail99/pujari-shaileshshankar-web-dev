@@ -34,7 +34,8 @@
                             vm.error = "Not able to update the widget";
                         });
             }else{
-                vm.widgetError = "Please enter a widget name!!!"
+                vm.widgetError = "Please enter a widget name!!!";
+                vm.error = "There are errors in the form!!!";
             }
         }
 
