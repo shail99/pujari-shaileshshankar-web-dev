@@ -23,16 +23,19 @@
         }
         init();
 
-        function updatePage(page){
-            PageService.updatePage(vm.pageId, page)
-                .then(
-                    function(success)
-                    {
-                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-                    },
-                    function(error){
-                        vm.error = "Not able to update the page for website";
-                    });
+        function updatePage(page,EditPageForm){
+            if(EditPageForm.$valid) {
+                PageService.updatePage(vm.pageId, page)
+                    .then(
+                        function (success) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                        },
+                        function (error) {
+                            vm.error = "Not able to update the page for website";
+                        });
+            }else{
+                vm.pageError = "Please enter a page name!!!";
+            }
         }
 
         function deletePage(){

@@ -11,7 +11,7 @@
                 New Page
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.createPage(pageName)" class="navbar-link">
+                <a ng-click="model.createPage(pageName, NewPageForm)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -23,14 +23,18 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <form>
+    <form name="NewPageForm" novalidate>
         <div class="form-group">
             <label for="page-name">Name</label>
             <input type="text"
                    ng-model="pageName"
                    class="form-control"
+                   required
                    id="page-name"
                    placeholder="Page Name">
+            <div ng-if="model.pageError" class="alert alert-danger" role="alert">
+                {{model.pageError}}
+            </div>
         </div>
         <div class="form-group">
             <label for="page-title">Title</label>

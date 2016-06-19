@@ -58,6 +58,6 @@ div.widget-properties{
 #password1.ng-invalid{
     background-color: beige;
 }
-#websiteName.ng-invalid{
+#page-name.ng-invalid{
     background-color: beige;
 }
