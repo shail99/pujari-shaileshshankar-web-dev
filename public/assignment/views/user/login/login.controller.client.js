@@ -12,13 +12,15 @@
             if(LoginForm.$valid){
                 UserService
                     .login(username,password)
-                    .then(function (response){
-                        var user = response.data;
-                        if(user){
-                            $location.url("/user/");
-                        }else{
+                    .then(
+                        function (response){
+                            var user = response.data;
+                            if(user){
+                                $location.url("/user/");
+                            }
+                        },
+                        function(error){
                             vm.error = "User not found";
-                        }
                     });
             }else{
                 vm.error = "There are errors in the form!!!";
