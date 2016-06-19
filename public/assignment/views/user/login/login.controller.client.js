@@ -8,18 +8,23 @@
 
     function LoginController($location, UserService){
         var vm = this;
-        vm.login = function(username,password){
+        vm.login = function(username,password,LoginForm){
+            console.log(LoginForm.$submitted)
+            if(LoginForm.$valid){
+                UserService
+                    .login(username,password)
+                    .then(function (response){
+                        var user = response.data;
+                        if(user){
+                            $location.url("/user/");
+                        }else{
+                            vm.error = "User not found";
+                        }
+                    });
+            }else{
+                vm.error = "There are errors in the form";
+            }
 
-            UserService
-                .login(username,password)
-                .then(function (response){
-                    var user = response.data;
-                    if(user){
-                        $location.url("/user/");
-                    }else{
-                        vm.error = "User not found";
-                    }
-                });
         }
     }
 })();

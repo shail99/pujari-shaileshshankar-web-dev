@@ -5,19 +5,32 @@
     <h1>
         Login
     </h1>
-    <input  type="text"
-            ng-model="username"
-            class="form-control"
-            placeholder="username"/>
-    <input  type="password"
-            ng-model="password"
-            class="form-control"
-            placeholder="password"/>
-
-    <a ng-click="model.login(username,password)" class="btn btn-primary btn-block">Login</a>
-    <a class="btn btn-success btn-block" href="#/register">Register</a>
-    <a href="/auth/facebook" class="btn btn-primary btn-block">
-        <span class = "fa fa-facebook-official"></span>
-        Facebook
-    </a>
+    <form name="LoginForm" novalidate>
+        <input name="username"
+               id="user1"
+               type="text"
+               ng-model="username"
+               class="form-control"
+               required
+               placeholder="username"/>
+        <div ng-show="LoginForm.username.$invalid && LoginForm.$submitted" class="alert alert-danger" role="alert">
+            Please enter a username
+        </div>
+        <input name="password"
+               id="pass1"
+               type="password"
+               ng-model="password"
+               required
+               class="form-control"
+               placeholder="password"/>
+        <div ng-show="LoginForm.password.$invalid && LoginForm.$submitted" class="alert alert-danger" role="alert">
+            Please enter a password
+        </div>
+        <button type="submit" ng-click="model.login(username,password,LoginForm)" class="btn btn-primary btn-block">Login</button>
+        <a class="btn btn-success btn-block" href="#/register">Register</a>
+        <a href="/auth/facebook" class="btn btn-primary btn-block">
+            <span class="fa fa-facebook-official"></span>
+            Facebook
+        </a>
+        </form>
 </div>
