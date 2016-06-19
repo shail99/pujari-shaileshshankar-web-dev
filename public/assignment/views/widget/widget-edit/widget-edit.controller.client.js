@@ -23,15 +23,19 @@
         }
         init();
 
-        function updateWidget(widget){
-            WidgetService.updateWidget(vm.widgetId,widget)
-                .then(
-                    function(success){
-                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-                },
-                    function (error) {
-                        vm.error = "Not able to update the widget";
-                });
+        function updateWidget(widget,NewWidgetForm){
+            if(NewWidgetForm.$valid) {
+                WidgetService.updateWidget(vm.widgetId, widget)
+                    .then(
+                        function (success) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                        },
+                        function (error) {
+                            vm.error = "Not able to update the widget";
+                        });
+            }else{
+                vm.widgetError = "Please enter a widget name!!!"
+            }
         }
 
         function deleteWidget(){

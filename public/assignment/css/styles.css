@@ -61,3 +61,6 @@ div.widget-properties{
 #page-name.ng-invalid{
     background-color: beige;
 }
+#widget-name.ng-invalid{
+    background-color: beige;
+}
