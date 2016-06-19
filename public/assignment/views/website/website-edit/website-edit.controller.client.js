@@ -21,15 +21,19 @@
         }
         init();
 
-        function updateWebsite(website){
-            WebsiteService.updateWebsite(vm.websiteId, website)
-                .then(
-                    function(success){
-                        $location.url("/user/"+vm.userId+"/website");
-                    },
-                    function(error){
-                        vm.error = "Not able to update the website for the user";
-                    });
+        function updateWebsite(website,EditWebsiteForm){
+            if(EditWebsiteForm.$valid) {
+                WebsiteService.updateWebsite(vm.websiteId, website)
+                    .then(
+                        function (success) {
+                            $location.url("/user/" + vm.userId + "/website");
+                        },
+                        function (error) {
+                            vm.error = "Not able to update the website for the user";
+                        });
+            }else{
+                vm.websiteError = "Please enter a website name!!!"
+            }
         }
 
         function deleteWebsite(){

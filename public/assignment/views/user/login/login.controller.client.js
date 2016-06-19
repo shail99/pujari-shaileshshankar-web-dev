@@ -9,7 +9,6 @@
     function LoginController($location, UserService){
         var vm = this;
         vm.login = function(username,password,LoginForm){
-            console.log(LoginForm.$submitted)
             if(LoginForm.$valid){
                 UserService
                     .login(username,password)
@@ -24,7 +23,6 @@
             }else{
                 vm.error = "There are errors in the form";
             }
-
         }
     }
 })();

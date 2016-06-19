@@ -49,9 +49,15 @@ div.widget-properties{
     width: 100%;
     height: 100%;
 }
-#user1.ng-invalid{
+#username.ng-invalid{
     background-color: beige;
 }
-#pass1.ng-invalid{
+#password.ng-invalid{
+    background-color: beige;
+}
+#password1.ng-invalid{
+    background-color: beige;
+}
+#websiteName.ng-invalid{
     background-color: beige;
 }

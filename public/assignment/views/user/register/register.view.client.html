@@ -5,20 +5,41 @@
     <h1>
         Register
     </h1>
-    <input type="text"
-           ng-model="username"
-           class="form-control"
-           placeholder="username"/>
-    <input type="password"
-           ng-model="password1"
-           class="form-control"
-           placeholder="password"/>
-    <input type="password"
-           ng-model="password2"
-           class="form-control"
-           placeholder="verify password"/>
+    <form name="RegisterForm" novalidate>
+        <input type="text"
+               id="username"
+               name="username"
+               ng-model="username"
+               class="form-control"
+               required
+               placeholder="username"/>
+        <div ng-show="RegisterForm.username.$invalid && RegisterForm.$submitted" class="alert alert-danger" role="alert">
+            Please enter a username
+        </div>
+        <input type="password"
+               name="password"
+               id="password"
+               ng-model="password1"
+               class="form-control"
+               required
+               placeholder="password"/>
+        <div ng-show="RegisterForm.password.$invalid && RegisterForm.$submitted" class="alert alert-danger" role="alert">
+            Please enter a password
+        </div>
+        <input type="password"
+               name="password1"
+               id="password1"
+               ng-model="password2"
+               class="form-control"
+               required
+               placeholder="verify password"/>
+        <div ng-if="model.passwordError" class="alert alert-danger" role="alert">
+            {{model.passwordError}}
+        </div>
 
-
-    <a ng-click="model.register(username,password1,password2)" class="btn btn-primary btn-block">Register</a>
-    <a class="btn btn-danger btn-block" href="#/login">Cancel</a>
+        <button type="submit"
+                ng-click="model.register(username,password1,password2,RegisterForm)"
+                class="btn btn-primary btn-block">Register</button>
+        <a class="btn btn-danger btn-block" href="#/login">Cancel</a>
+    </form>
 </div>
