@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                   class="navbar-link">
                     <span class="glyphicon glyphicon-menu-left">
                     </span>
                 </a>
@@ -11,7 +12,7 @@
                 HTML Widget
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widget,NewWidgetForm)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -23,34 +24,49 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <div ng-model="model.widget.text"
-         text-angular
-         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+    <form name="NewWidgetForm" novalidate>
+        <label for="widget-name">Name</label>
+        <input type="text"
+               ng-model="model.widget.name"
+               class="form-control"
+               id="widget-name"
+               placeholder="Widget Name"
+               required
+               value="">
+        <div ng-if="model.widgetError">
+                <span class="error">
+                    {{model.widgetError}}
+                </span>
+        </div>
+        <div ng-model="model.widget.text"
+             text-angular
+             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
         ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
         ['indent','outdent'],['html']]">
+        </div>
+
+        <div ng-bind-html="model.widget.text"></div>
+
+        <a ng-click="model.deleteWidget()"
+           class="btn btn-danger btn-block">
+            Delete
+        </a>
+    </form>
     </div>
-
-    <div ng-bind-html="model.widget.text"></div>
-
-    <a ng-click="model.deleteWidget()"
-       class="btn btn-danger btn-block">
-        Delete
-    </a>
-</div>
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <div class="row navbar-text">
-            <div class="col-xs-3 text-center">
-            </div>
-            <div class="col-xs-3 text-center">
-            </div>
-            <div class="col-xs-3 text-center">
-            </div>
-            <div class="col-xs-3 text-center">
-                <a href="#/user/">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row navbar-text">
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                    <a href="#/user/">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>

@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                   class="navbar-link">
                     <span class="glyphicon glyphicon-menu-left">
                     </span>
                 </a>
@@ -11,7 +12,7 @@
                 HTML Widget
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widget,NewWidgetForm)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -19,23 +20,38 @@
         </div>
     </div>
 </nav>
-<div class = "container-fluid">
+<div class="container-fluid">
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    Text
-    <input ng-model="model.widget.text" class="form-control"/>
-    Rows
-    <input ng-model="model.widget.rows" class="form-control" type="number"/>
-    Placeholder
-    <input ng-model="model.widget.placeholder" class="form-control"/>
-    Formatted
-    <input ng-model="model.widget.formatted" type="checkbox"/>
+    <form name="NewWidgetForm" novalidate>
+        <label for="widget-name">Name</label>
+        <input type="text"
+               ng-model="model.widget.name"
+               class="form-control"
+               id="widget-name"
+               placeholder="Widget Name"
+               required
+               value="">
+        <div ng-if="model.widgetError">
+                <span class="error">
+                    {{model.widgetError}}
+                </span>
+        </div>
+        Text
+        <input ng-model="model.widget.text" class="form-control"/>
+        Rows
+        <input ng-model="model.widget.rows" class="form-control" type="number"/>
+        Placeholder
+        <input ng-model="model.widget.placeholder" class="form-control"/>
+        Formatted
+        <input ng-model="model.widget.formatted" type="checkbox"/>
 
-    <a ng-click="model.deleteWidget()"
-       class="btn btn-danger btn-block">
-        Delete
-    </a>
+        <a ng-click="model.deleteWidget()"
+           class="btn btn-danger btn-block">
+            Delete
+        </a>
+    </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
