@@ -17,7 +17,8 @@
                     username: username,
                     password: password1,
                     firstName: "",
-                    lastName: ""
+                    lastName: "",
+                    type: "developer"
                 };
 
                 UserService

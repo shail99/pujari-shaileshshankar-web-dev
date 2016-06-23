@@ -23,8 +23,29 @@ app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
+
+// import mongoose library
+var mongoose = require("mongoose");
+var connectionString = 'mongodb://127.0.0.1:27017/cs5610summer1';
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+mongoose.connect(connectionString);
+
+var assignmentUserModel = require("./assignment/models/user/user.model.server.js")();
+var projectUserModel = require("./project/models/user/user.model.server.js")();
+var security = require("./security")(assignmentUserModel,projectUserModel);
+var passport = security.getPassport();
+
+var project = require("./project/app.js");
+project(app,projectUserModel,passport);
+
 var assignment = require("./assignment/app.js");
-assignment(app);
+assignment(app,assignmentUserModel,passport);
 
 var home = require("./home/app.js");
 home(app);

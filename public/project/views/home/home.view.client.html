@@ -1,0 +1,409 @@
+<section id="home">
+    <div id="main-slider" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            <li data-target="#main-slider" data-slide-to="1"></li>
+            <li data-target="#main-slider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img class="img-responsive" src="../img/project-images/slider/bg_1.jpg" alt="slider">
+                <div class="carousel-caption">
+                    <h2>register for our next event </h2>
+                    <h4>full event package only @$199</h4>
+                    <a href="#contact">GRAB YOUR TICKETS <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="../img/project-images/slider/bg2.jpg" alt="slider">
+                <div class="carousel-caption">
+                    <h2>register for our next event </h2>
+                    <h4>full event package only @$199</h4>
+                    <a href="#contact">GRAB YOUR TICKETS <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="../img/project-images/slider/bg_2.jpg" alt="slider">
+                <div class="carousel-caption">
+                    <h2>register for our next event </h2>
+                    <h4>full event package only @$199</h4>
+                    <a href="#contact">GRAB YOUR TICKETS <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#home-->
+
+<section id="explore">
+    <div class="container">
+        <div class="row">
+            <div class="watch">
+                <img class="img-responsive" src="../img/project-images/watch.png" alt="">
+            </div>
+            <div class="col-md-4 col-md-offset-2 col-sm-5">
+                <h2>Search For Events</h2>
+            </div>
+            <div class="col-sm-7 col-md-6">
+                <form name="SearchEventForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input name="location"
+                                   id="location"
+                                   type="text"
+                                   ng-model="location"
+                                   class="form-control col-md-6"
+                                   required
+                                   placeholder="Enter Location"/>
+                            <div ng-show="SearchEventForm.location.$invalid && SearchEventForm.$submitted">
+                            <span class="error">
+                                Please enter a location!!
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input name="eventname"
+                                   id="eventname"
+                                   type="text"
+                                   ng-model="event"
+                                   required
+                                   class="form-control col-md-6"
+                                   placeholder="Event to search"/>
+                            <div ng-show="SearchEventForm.eventname.$invalid && SearchEventForm.$submitted">
+                            <span class="error">
+                                  Please enter an event!!
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" ng-click="model.searchEvent(event,location,SearchEventForm)"
+                            class="btn btn-primary btn-block">
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section><!--/#explore-->
+
+<section id="event">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-9">
+                <div id="event-carousel" class="carousel slide" data-interval="false">
+                    <h2 class="heading">THE ROCKING Performers</h2>
+                    <a class="even-control-left" href="#event-carousel" data-slide="prev"><i
+                            class="fa fa-angle-left"></i></a>
+                    <a class="even-control-right" href="#event-carousel" data-slide="next"><i
+                            class="fa fa-angle-right"></i></a>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/project-images/event/event1.jpg"
+                                             alt="event-image">
+                                        <h4>Chester Bennington</h4>
+                                        <h5>Vocal</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/project-images/event/event2.jpg"
+                                             alt="event-image">
+                                        <h4>Mike Shinoda</h4>
+                                        <h5>vocals, rhythm guitar</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/project-images/event/event3.jpg"
+                                             alt="event-image">
+                                        <h4>Rob Bourdon</h4>
+                                        <h5>drums</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/project-images/event/event1.jpg"
+                                             alt="event-image">
+                                        <h4>Chester Bennington</h4>
+                                        <h5>Vocal</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/project-images/event/event2.jpg"
+                                             alt="event-image">
+                                        <h4>Mike Shinoda</h4>
+                                        <h5>vocals, rhythm guitar</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/project-images/event/event3.jpg"
+                                             alt="event-image">
+                                        <h4>Rob Bourdon</h4>
+                                        <h5>drums</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="guitar">
+                <img class="img-responsive" src="../img/project-images/guitar.png" alt="guitar">
+            </div>
+        </div>
+    </div>
+</section><!--/#event-->
+
+<section id="about">
+    <div class="guitar2">
+        <img class="img-responsive" src="../img/project-images/guitar2.jpg" alt="guitar">
+    </div>
+    <div class="about-content">
+        <h2>About EventSmart</h2>
+        <p>I have created a website which will allow users to search for events of their interest and also book tickets
+            at the EventBrite site.This site gives a user friendly access to events of their choice and search for their
+            favourite categories. Moreover they can like, review and follow other users.
+        </p>
+        <a href="" class="btn btn-primary">View Date & Place <i class="fa fa-angle-right"></i></a>
+
+    </div>
+</section><!--/#about-->
+
+<section id="twitter">
+    <div id="twitter-feed" class="carousel slide" data-interval="false">
+        <div class="twit">
+            <img class="img-responsive" src="../img/project-images/twit.png" alt="twit">
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="text-center carousel-inner center-block">
+                    <div class="item active">
+                        <img src="../img/project-images/twitter/twitter1.png" alt="">
+                        <p>In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit </p>
+                        <a href="#">http://t.co/yY7s1IfrAb 2 days ago</a>
+                    </div>
+                    <div class="item">
+                        <img src="../img/project-images/twitter/twitter2.png" alt="">
+                        <p>In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit </p>
+                        <a href="#">http://t.co/yY7s1IfrAb 2 days ago</a>
+                    </div>
+                    <div class="item">
+                        <img src="../img/project-images/twitter/twitter3.png" alt="">
+                        <p>In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit </p>
+                        <a href="#">http://t.co/yY7s1IfrAb 2 days ago</a>
+                    </div>
+                </div>
+                <a class="twitter-control-left" href="#twitter-feed" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                <a class="twitter-control-right" href="#twitter-feed" data-slide="next"><i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section><!--/#twitter-feed-->
+<div ng-if="!currentUser">
+<section id="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Login Here</h2>
+                <div ng-if="model.LoginError" class="alert alert-danger" role="alert">
+                    {{model.LoginError}}
+                </div>
+                <div ng-if="model.LoginSuccess" class="alert alert-info" role="alert">
+                    {{model.LoginSuccess}}
+                </div>
+                <form name="LoginForm" novalidate>
+                    <div class="form-group">
+                        <input name="username"
+                               id="username"
+                               type="text"
+                               ng-model="username"
+                               class="form-control"
+                               required
+                               placeholder="username"/>
+                        <div ng-show="LoginForm.username.$invalid && LoginForm.$submitted">
+                            <span class="error">
+                            Please enter a username
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input name="password"
+                               id="password"
+                               type="password"
+                               ng-model="password"
+                               required
+                               class="form-control"
+                               placeholder="password"/>
+                        <div ng-show="LoginForm.password.$invalid && LoginForm.$submitted">
+                            <span class="error">
+                                Please enter a password
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" ng-click="model.login(username,password,LoginForm)"
+                                class="btn btn-primary btn-block">
+                            Login
+                        </button>
+                        <a href="/auth/google" class="btn btn-danger btn-block">
+                            <i class="fa fa-google"></i>
+                            Login with Google
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Register Here</h2>
+                <div ng-if="model.RegisterError" class="alert alert-danger" role="alert">
+                    {{model.RegisterError}}
+                </div>
+                <div ng-if="model.RegisterSuccess" class="alert alert-info" role="alert">
+                    {{model.RegisterSuccess}}
+                </div>
+                <form name="RegisterForm" novalidate>
+                    <div class="form-group">
+                        <label for="username1">Username</label>
+                        <input name="registername"
+                               id="username1"
+                               type="text"
+                               ng-model="registername"
+                               class="form-control"
+                               required
+                               placeholder="username"/>
+                        <div ng-show="RegisterForm.registername.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                            Please enter a username
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input ng-model="emailid"
+                               name="email"
+                               type="email"
+                               required
+                               class="form-control"
+                               id="email"
+                               placeholder="abc@example.com">
+                        <div ng-show="RegisterForm.email.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                                Invalid email
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Password</label>
+                        <input name="registerpassword"
+                               id="password1"
+                               type="password"
+                               ng-model="registerpassword"
+                               required
+                               class="form-control"
+                               placeholder="password"/>
+                        <div ng-show="RegisterForm.registerpassword.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                                Please enter a password
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Verify Password</label>
+                        <input name="verifypassword"
+                               id="password2"
+                               type="password"
+                               ng-model="verifypassword"
+                               required
+                               class="form-control"
+                               placeholder="Verify Password"/>
+                        <div ng-show="RegisterForm.verifypassword.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                                Please enter a password
+                            </span>
+                        </div>
+                        <div ng-if="model.passwordError">
+                            <span class="error">
+                                {{model.passwordError}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" ng-click="model.register(registername,registerpassword,emailid,RegisterForm)"
+                                class="btn btn-primary btn-block">
+                            SignUp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section><!--/#sponsor-->
+    </div>
+
+<section id="contact">
+    <div class="contact-section">
+        <div class="ear-piece">
+            <img class="img-responsive" src="../img/project-images/ear-piece.png" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-4">
+                    <div class="contact-text">
+                        <h3>Contact</h3>
+                        <address>
+                            E-mail: promo@party.com<br>
+                            Phone: +1 (123) 456 7890<br>
+                            Fax: +1 (123) 456 7891
+                        </address>
+                    </div>
+                    <div class="contact-address">
+                        <h3>Contact</h3>
+                        <address>
+                            Unit C2, St.Vincent's Trading Est.,<br>
+                            Feeder Road,<br>
+                            Bristol, BS2 0UY<br>
+                            United Kingdom
+                        </address>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div id="contact-section">
+                        <h3>Send a message</h3>
+                        <div class="status alert alert-success" style="display: none"></div>
+                        <form id="main-contact-form" class="contact-form" name="contact-form" method="post"
+                              action="sendemail.php">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" required="required"
+                                       placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" required="required"
+                                       placeholder="Email ID">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" id="message" required="required" class="form-control" rows="4"
+                                          placeholder="Enter your message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary pull-right">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

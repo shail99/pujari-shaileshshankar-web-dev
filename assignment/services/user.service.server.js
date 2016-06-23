@@ -1,11 +1,11 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+//var passport = require('passport');
+//var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function (app, models) {
+module.exports = function (app, userModel,passport) {
 
-    var userModel = models.userModel;
+    //var userModel = models.userModel;
     app.get("/auth/facebook", passport.authenticate('facebook'));
     app.get("/auth/facebook/callback", passport.authenticate('facebook',{
         successRedirect: '/assignment/#/user',
@@ -13,7 +13,7 @@ module.exports = function (app, models) {
     }));
     app.post("/api/user",createUser);
     app.get("/api/user", getUsers);
-    app.post("/api/login",passport.authenticate('local'), login);
+    app.post("/api/login",passport.authenticate('assignment'), login);
     app.get("/api/user/:userId",findUserById);
     app.put("/api/user/:userId",updateUser);
     app.delete("/api/user/:userId",deleteUser);
@@ -21,9 +21,9 @@ module.exports = function (app, models) {
     app.get("/api/loggedIn", loggedIn);
     app.post("/api/register", register);
 
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+//    passport.use(new LocalStrategy(localStrategy));
+//    passport.serializeUser(serializeUser);
+//    passport.deserializeUser(deserializeUser);
 
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
