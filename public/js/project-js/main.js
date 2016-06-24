@@ -61,6 +61,11 @@ jQuery(function($) {'use strict',
 		filter: ':not(.no-scroll)'
 	});
 
+	$(document).ready(function(){
+
+
+		$("[data-toggle=tooltip]").tooltip();
+	});
 });
 
 

@@ -1,47 +1,63 @@
-(function(){
+(function () {
     angular
         .module("EventSmart")
         .config(Config);
 
     function Config($routeProvider) {
         $routeProvider
-            .when("/",{
+            .when("/", {
                 templateUrl: "views/home/home.view.client.html",
                 controller: "HomePageController",
                 controllerAs: "model",
-                resolve:{
+                resolve: {
                     loggedIn: checkLoggedIn
                 }
             })
-            .when("/event/:eventName/location/:location",{
+            .when("/event/:eventName/location/:location", {
                 templateUrl: "views/event/event-search-list.view.client.html",
                 controller: "EventSearchListController",
                 controllerAs: "model",
-                resolve:{
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+            .when("/event/:eventId", {
+                templateUrl: "views/event/event-detail.view.client.html",
+                controller: "EventDetailController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+            .when("/user/profile", {
+                templateUrl: "views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve: {
                     loggedIn: checkLoggedIn
                 }
             })
     }
 
-    function checkLoggedIn(UserService, $location, $q, $rootScope){
+    function checkLoggedIn(UserService, $location, $q, $rootScope) {
         var deferred = $q.defer();
         UserService
             .loggedIn()
             .then(
-                function(response){
+                function (response) {
                     var user = response.data;
-                    if(user == '0'){
+                    if (user == '0') {
                         $rootScope.currentUser = null;
                         //deferred.reject();
                         //$location.url("/login");
-                    }else{
+                    } else {
                         $rootScope.currentUser = user;
                         //deferred.resolve();
                     }
 
                     deferred.resolve();
                 },
-                function(error){
+                function (error) {
                     $location.url("/");
                 }
             );

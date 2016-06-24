@@ -47,13 +47,12 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-4 col-lg-4 col-md-4" ng-repeat="event in model.events">
                     <div class="thumbnail">
-                        <img class="image-set" ng-src="{{model.getSafeImageUrl(event.logo)}}" height="50px">
+                        <img class="image-set" ng-src="{{model.getSafeImageUrl(event.logo)}}">
                         <div class="caption">
-                            <h6 class="pull-right">{{event.start.local}}</h6>
-                            <h6 class="pull-right">{{event.start.timezone}}</h6>
-                            <h5><a href="#">{{event.name.text}}</a>
-                            </h5>
-                            <a href="{{event.url}}">Book Tickets now</a>
+                            <h4 class="event-name">{{event.name.text}}</h4>
+                        </div>
+                        <div class="caption">
+                            <h3 class="event-name"><a href="#/event/{{event.id}}">Book my Tickets</a></h3>
                         </div>
                     </div>
                 </div>

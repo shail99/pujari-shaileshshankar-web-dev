@@ -26,6 +26,7 @@
                 .then(
                     function(events){
                         vm.events = events.data.events;
+                        console.log(vm.events);
                     },
                     function(error){
                         vm.error = "Search did not match any results!!!"
@@ -45,7 +46,6 @@
 
         function eventByCategory(category){
             vm.event = category.replace('&',"and");
-            console.log(vm.event);
             init();
         }
     }

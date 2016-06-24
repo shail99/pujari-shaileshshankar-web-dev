@@ -9,7 +9,8 @@
     function EventService($http) {
         var api = {
             getEvents: getEvents,
-            getCategories: getCategories
+            getCategories: getCategories,
+            getEventbyId: getEventbyId
 
         };
         return api;
@@ -25,6 +26,12 @@
             var url = urlBase
                 .replace("TOKEN", token)
                 .replace("SEARCH_TEXT", event);
+            return $http.get(url);
+        }
+        function getEventbyId(eventId) {
+            var urlBase = "https://www.eventbriteapi.com/v3/events/"+eventId+"/?token=TOKEN";
+            var url = urlBase
+                .replace("TOKEN", token)
             return $http.get(url);
         }
     }

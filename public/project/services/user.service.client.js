@@ -65,7 +65,7 @@
         }
 
         function updateUser(userId, newUser){
-            var url = "/api/user/" + userId;
+            var url = "/project/user/" + userId;
             return $http.put(url, newUser);
         }
 

@@ -22,8 +22,8 @@
         }
 
         function scrollTo(id) {
+            $location.url("/");
             var old = $location.hash();
-            console.log(id);
             $location.hash(id);
             $anchorScroll();
             //reset to old to keep any additional routing logic from kicking in
@@ -35,10 +35,10 @@
                 .logout()
                 .then(
                     function(response){
-                        $route.reload();
+                        $location.url("/");
                     },
                     function(error){
-                        $route.reload();
+                        $location.url("/");
                     }
                 );
         }

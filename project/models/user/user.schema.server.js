@@ -13,11 +13,12 @@ module.exports = function () {
             id: String,
             displayName: String
         },
+        url: String,
         lastName: String,
         email: String,
         type: String,
         dateCreated: {type: Date, default: Date.now},
-        websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Website'}]
+        events: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
     }, {collection: "project.user"});
     
     return UserSchema;

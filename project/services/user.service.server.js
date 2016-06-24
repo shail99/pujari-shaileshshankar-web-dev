@@ -3,9 +3,13 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
+var multer = require('multer'); // npm install multer --save
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
 module.exports = function (app, userModel, passport) {
 
     //var userModel = models.userModel;
+    app.post ("/profile/uploads", upload.single('myFile'), uploadImage);
     app.get("/auth/facebook", passport.authenticate('facebook'));
     app.get("/auth/facebook/callback", passport.authenticate('facebook',{
         successRedirect: '/assignment/#/user',
@@ -15,7 +19,7 @@ module.exports = function (app, userModel, passport) {
     app.get("/api/user", getUsers);
     app.post("/api/login",passport.authenticate('project'), login);
     app.get("/api/user/:userId",findUserById);
-    app.put("/api/user/:userId",updateUser);
+    app.put("/project/user/:userId",updateUser);
     app.delete("/api/user/:userId",deleteUser);
     app.post("/api/logout",logout);
     app.get("/api/loggedIn", loggedIn);
@@ -93,23 +97,6 @@ module.exports = function (app, userModel, passport) {
     function login(request, response) {
         var user = request.user;
         response.json(user);
-    }
-
-    function serializeUser(user, done) {
-        done(null, user);
-    }
-
-    function deserializeUser(user, done) {
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
     }
 
     function register(request, response){
@@ -242,5 +229,48 @@ module.exports = function (app, userModel, passport) {
                     response.statusCode(404).send(error);
                 }
             );
+    }
+
+    function uploadImage(request, response) {
+
+        console.log(request);
+        var userId        = request.user._id;
+        console.log(userId);
+        var myFile        = request.file;
+
+        if(myFile) {
+            var originalname = myFile.originalname; // file name on user's computer
+            var filename = myFile.filename;     // new file name in upload folder
+            var path = myFile.path;         // full path of uploaded file
+            var destination = myFile.destination;  // folder where file is saved to
+            var size = myFile.size;
+            var mimetype = myFile.mimetype;
+
+            userModel
+                .findUserById(userId)
+                .then(
+                    function(user){
+                        console.log(user);
+                        user.url = "/uploads/" + filename;
+                        console.log(user);
+                        userModel
+                            .updateUser(userId,user)
+                            .then(
+                                function(success){
+                                    response.send(200);
+                                },
+                                function(error){
+                                    response.statusCode(404).send(error);
+                                }
+                            )
+                    },
+                    function(error){
+                        response.statusCode(404).send(error);
+                    }
+                );
+            response.redirect("/project/#/user/profile");
+        }else{
+            response.redirect("/project/#/user/profile");
+        }
     }
 };
