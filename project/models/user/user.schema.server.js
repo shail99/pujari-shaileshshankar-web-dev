@@ -8,17 +8,23 @@ module.exports = function () {
         username: {type: String, required: true},
         password: String,
         firstName: String,
-        facebook:{
+        google:{
             token: String,
             id: String,
             displayName: String
         },
         url: String,
         lastName: String,
+        linkedin: String,
+        facebooklink: String,
+        employed: String,
+        company: String,
+        date: String,
+        description: String,
         email: String,
         type: String,
         dateCreated: {type: Date, default: Date.now},
-        events: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
+        eventsLiked: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
     }, {collection: "project.user"});
     
     return UserSchema;

@@ -9,12 +9,12 @@
         .controller("IndexController", IndexController);
 
 
-    function IndexController($location, $anchorScroll, UserService, $route) {
+    function IndexController($location, $anchorScroll, UserService, $route,$rootScope) {
         var vm = this;
         vm.scrollTo = scrollTo;
         vm.logout = logout;
         vm.searchEvent = searchEvent;
-
+        
         function searchEvent(eventName,SearchEventForm) {
             if (SearchEventForm.$valid) {
                 $location.url("/event/" + eventName + "/location/boston");

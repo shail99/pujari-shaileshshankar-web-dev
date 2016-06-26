@@ -9,7 +9,7 @@
 body {
   font-family: 'Dosis', sans-serif;
   font-size: 17px;
-  color: #bbbbbb;
+  color: #777;
 }
 
 
@@ -104,7 +104,7 @@ h2 {
 
 .navbar-brand {
   background-color: rgba(0, 0, 0, 0.96);
-  height: 60px;
+  height: 45px;
   margin-bottom: 10px;
   position: relative;
   width: 297px;
@@ -760,5 +760,11 @@ h2 {
 span.error{
   color: red;
   font-size: medium;
+}
+
+.navigation.img-circle.img-responsive{
+  padding-top: 10px;
+  width: 30px;
+  height: 40px
 }
 

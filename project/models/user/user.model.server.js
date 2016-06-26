@@ -14,7 +14,7 @@ module.exports = function () {
         findUserByUsername: findUserByUsername,
         updateUser: updateUser,
         deleteUser: deleteUser,
-        findFacebookUser: findFacebookUser
+        findUserByGoogleId: findUserByGoogleId
     };
     return api;
     
@@ -22,8 +22,8 @@ module.exports = function () {
         return UserInfo.create(user);
     }
 
-    function findFacebookUser(facebookId){
-        return UserInfo.findOne({"facebook.id": facebookId})
+    function findUserByGoogleId(googleId){
+        return UserInfo.findOne({"google.id": googleId})
     }
 
     function findUserById(userId){

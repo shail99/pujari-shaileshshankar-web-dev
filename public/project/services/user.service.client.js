@@ -50,12 +50,12 @@
 
         }
         function findUserById(userId){
-            var url = "/api/user/" + userId;
+            var url = "/project/user/" + userId;
             return $http.get(url);
         }
 
         function findUserByUsername(username){
-            var url = "/api/user?username="+username;
+            var url = "/project/api/user/"+username;
             return $http.get(url);
         }
 

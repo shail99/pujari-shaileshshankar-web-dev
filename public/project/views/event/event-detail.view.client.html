@@ -14,16 +14,14 @@
         <div class="col-md-9">
             <div class="thumbnail">
                 <div class="caption-full">
-                    <div ng-if="model.user"><h2 class="pull-right"><a href=""><span class="fa fa-thumbs-up"></span></a></h2></div>
-                    <h2><a class="title" href="">{{model.event.name.text}}</a>
-                    </h2>
+                    <h2><a class="title" href="">{{model.event.name.text}}</a></h2>
                     <img class="img-responsive pull-right event-detail" ng-src="{{model.event.logo.url}}" alt="">
                     </div>
                 <div class="caption-full">
                     <div class="event-detail" ng-bind-html="model.getSafeHtml(model.event.description.html)"></div>
                 </div>
                 <div class="ratings">
-                    <p class="pull-right">3 reviews</p>
+                    <p class="pull-right">{{model.comments.length}} reviews</p>
                     <p>
                         <a target="_blank" href="{{model.event.url}}"><span class="fa fa-external-link-square"></span>
                             Book tickets at Eventbrite
@@ -32,26 +30,32 @@
                 </div>
             </div>
 
-            <h2 class="page-header"><span class="fa fa-comments"></span>Comments</h2>
+            <h2 class="page-header"><span class="fa fa-comments"></span>Comments
+                <a ng-click="model.saveEvent()" ng-if="model.user && !model.savedEvent" class="pull-right"><span class="fa fa-thumbs-up"></span>Save Event</a>
+                <a ng-click="model.unLikeEvent()" ng-if="model.user && model.savedEvent" class="pull-right"><span class="fa fa-thumbs-down"></span>Unlike</a>
+            </h2>
+
             <section class="comment-list">
                 <!-- First Comment -->
-                <article class="row">
-                    <div class="col-md-2 col-sm-2 hidden-xs">
+                <article ng-repeat="comment in model.comments" class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
                         <figure class="thumbnail">
-                            <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                            <img ng-if="comment.url" class="img-responsive" ng-src="{{comment.url}}" />
+                            <img ng-if="!comment.url" class="img-responsive" ng-src="../../../img/project-images/user.png" />
                         </figure>
                     </div>
-                    <div class="col-md-10 col-sm-10">
+                    <div class="col-md-10 col-sm-10 col-xs-10">
                         <div class="panel panel-default arrow left">
                             <div class="panel-body">
+                                <a ng-if="model.user.username === comment.username"
+                                   class="pull-right"
+                                   ng-click="model.removeComment(comment._id)"><span class="fa fa-trash"></span></a>
                                 <header class="text-left">
-                                    <div class="comment-user"><i class="fa fa-user"></i><strong>That Guy</strong></div>
-                                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> <strong>Dec 16, 2014</strong></time>
+                                    <div class="comment-user"><a ng-click="model.visitProfile(comment.username)"><i class="fa fa-user"></i><strong>{{comment.username}}</strong></a></div>
+                                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> <strong>{{comment.dateCreated}}</strong></time>
                                 </header>
                                 <div class="comment-post">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
+                                    <p>{{comment.commentText}}</p>
                                 </div>
                             </div>
                         </div>
@@ -63,9 +67,15 @@
                         <div class="status-upload">
                             <form name="commentForm">
                                 <textarea name="comment"
+                                          id="commentText"
+                                          ng-model="commentText"
                                           required
                                           placeholder="Your comments are valuable....." ></textarea>
-                                <button id="commentButton" type="submit" class="btn btn-success green"><i class="fa fa-comment"></i> Comment</button>
+                                <button ng-click="model.createComment(commentText)"
+                                   id="commentButton"
+                                   class="btn btn-success green">
+                                    <i class="fa fa-comment"></i> Comment
+                                </button>
                             </form>
                         </div><!-- Status Upload  -->
             </div><!-- Widget Area -->

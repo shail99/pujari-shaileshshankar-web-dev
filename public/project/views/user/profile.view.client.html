@@ -40,11 +40,59 @@
                    id="lastName"
                    placeholder="Smith">
         </div>
+        <div class="form-group">
+            <label for="dateofbirth">Date Of Birth</label>
+            <input ng-model="model.user.date"
+                   type="text"
+                   class="form-control"
+                   id="dateofbirth"
+                   placeholder="DOB">
+        </div>
+        <div class="form-group">
+            <label for="employed">Employment Status</label>
+            <select ng-model="model.user.employed"
+                    class="form-control"
+                    id="employed">
+                <option value="" selected disabled>Select Employment Status</option>
+                <option value="Student">Student</option>
+                <option value="Self-Employed">Self-Employed</option>
+                <option value="Service">Service</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="company">Company Name</label>
+            <input ng-model="model.user.company"
+                   type="text"
+                   class="form-control"
+                   id="company"
+                   placeholder="Company Name">
+        </div>
+        <div class="form-group">
+            <label for="facebooklink">Facebook Link</label>
+            <input ng-model="model.user.facebooklink"
+                   type="text"
+                   class="form-control"
+                   id="facebooklink"
+                   placeholder="https://www.facebook.com/">
+        </div>
+        <div class="form-group">
+            <label for="linkedin">LinkedIn URL</label>
+            <input ng-model="model.user.linkedin"
+                   type="text"
+                   class="form-control"
+                   id="linkedin"
+                   placeholder="https://www.linkedin.com/">
+        </div>
+        <div class="form-group">
+            <label for="description">Something about Myself:</label>
+            <textarea class="form-control"
+                      rows="5"
+                      ng-model="model.user.description"
+                      id="description"></textarea>
+        </div>
 
         <a class="btn btn-primary btn-block" ng-click="model.updateUser(model.user)">UpdateInfo</a>
     </form>
-
-
 
     </div>
     <div class="col-md-4">
@@ -68,3 +116,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(function() {
+        $("#dateofbirth").datepicker();
+    });
+</script>

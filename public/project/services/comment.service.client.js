@@ -1,28 +1,30 @@
 (function () {
     angular
         .module("EventSmart")
-        .factory("EventService", EventService);
+        .factory("CommentService", CommentService);
 
-    var token = "2ML7YE6OJPNSP5RANX4H";
-    var secret = "SS3WKDVTKQ7XF2YDFQE7ZUBXTZSHIUXFC4YYGWIND4GX4PZDBS";
-
-    function EventService($http) {
+    function CommentService($http) {
         var api = {
-            getEvents: getEvents,
-            getCategories: getCategories,
-            getEventbyId: getEventbyId,
-            findEventByEventIdFromDb: findEventByEventIdFromDb,
-            findEventByIdFromDb: findEventByIdFromDb,
-            createEvent: createEvent
-
+            createComment: createComment,
+            findCommentByEventId: findCommentByEventId,
+            removeComment: removeComment
         };
         return api;
 
-        function createEvent(event){
-            var url = "/project/event";
-            return $http.post(url,event);
+        function removeComment(commentId){
+            var url = "/project/comment/" + commentId;
+            return $http.delete(url);
         }
 
+        function createComment(comment){
+            var url = "/project/comment";
+            return $http.post(url,comment);
+        }
+
+        function findCommentByEventId(eventId){
+            var url = "/project/comment/" + eventId;
+            return $http.get(url);
+        }
         function getCategories(){
             var urlBase = "https://www.eventbriteapi.com/v3/categories/?token=TOKEN";
             var url = urlBase
@@ -40,14 +42,6 @@
             var urlBase = "https://www.eventbriteapi.com/v3/events/"+eventId+"/?token=TOKEN";
             var url = urlBase
                 .replace("TOKEN", token)
-            return $http.get(url);
-        }
-        function findEventByEventIdFromDb(eventId){
-            var url = "/project/event/" + eventId;
-            return $http.get(url);
-        }
-        function findEventByIdFromDb(id){
-            var url = "/project/profile/event/" + id;
             return $http.get(url);
         }
     }

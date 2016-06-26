@@ -1,0 +1,174 @@
+<div class="container">
+    <div class="col-md-3">
+        <p class="lead"></p>
+        <div class="list-group">
+            <a ng-repeat="category in model.categories"
+               ng-click="model.eventByCategory(category.name)"
+               class="list-group-item">{{category.name}}</a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card hovercard col-md-9">
+            <div class="card-background">
+                <img class="card-bkimg" alt="" src="../../../img/project-images/profile-bg.jpg">
+                <!-- http://lorempixel.com/850/280/people/9/ -->
+            </div>
+            <div class="useravatar">
+                <img ng-if="model.visitedUser.url" alt="" ng-src="{{model.visitedUser.url}}">
+                <img ng-if="!model.visitedUser.url" alt="" ng-src="../../../img/project-images/user.png">
+            </div>
+            <div class="card-info"><span class="card-title">{{model.visitedUser.username}}</span>
+
+            </div>
+
+        </div>
+
+        <div class="card hovercard col-md-3">
+            <div class="card-background">
+            </div>
+            <div class="useravatar">
+            </div>
+            <div ng-if="!model.userFollowing && model.username !== model.loggedInUser.username"
+                 class="card-info">
+                <span class="card-title">
+                    <a ng-click="model.followUser()"
+                       class="btn btn-primary btn-default">
+                        <span class="glyphicon glyphicon-user"></span>  Follow Me</a>
+                </span>
+            </div>
+            <div ng-if="model.userFollowing && model.username !== model.loggedInUser.username"
+                 class="card-info">
+                <span class="card-title">
+                    <a ng-click="model.unFollowUser()"
+                        class="btn btn-danger btn-default">
+                        <span class="glyphicon glyphicon-user"></span> UnFollow</a>
+                </span>
+            </div>
+
+        </div>
+
+        <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab"><span
+                        class="fa fa-user" aria-hidden="true"></span>
+                    <div class="hidden-xs">About Myself</div>
+                </button>
+            </div>
+            <div ng-if="model.loggedInUser" class="btn-group" role="group">
+                <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span
+                        class="fa fa-heart" aria-hidden="true"></span>
+                    <div class="hidden-xs">Events Liked <span class="badge">{{model.visitedUserEvents.length}}</span> </div>
+                </button>
+            </div>
+            <div ng-if="model.loggedInUser" class="btn-group" role="group">
+                <button type="button" id="following"
+                        class="btn btn-default"
+                        href="#tab3"
+                        data-toggle="tab">
+                    <span class="fa fa-users" aria-hidden="true"></span>
+                    <div class="hidden-xs">Following <span class="badge">{{model.following.length}}</span> </div>
+                </button>
+            </div>
+            <div ng-if="model.loggedInUser" class="btn-group" role="group">
+                <button type="button" id="followers"
+                        class="btn btn-default"
+                        href="#tab4"
+                        data-toggle="tab">
+                    <span class="fa fa-users" aria-hidden="true"></span>
+                    <div class="hidden-xs">Followers <span class="badge">{{model.followers.length}}</span> </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="well">
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab1">
+                    <div class="row">
+                    <div class=" col-md-9 col-lg-9 ">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>FirstName:</td>
+                                <td>{{model.visitedUser.firstName}}</td>
+                            </tr>
+                            <tr>
+                                <td>LastName:</td>
+                                <td>{{model.visitedUser.lastName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>{{model.visitedUser.date}}</td>
+                            </tr>
+                            <tr>
+                                <td>Email Id</td>
+                                <td>{{model.visitedUser.email}}</td>
+                            </tr>
+                            <tr>
+                                <td>Employment Status</td>
+                                <td>{{model.visitedUser.employed}}</td>
+                            </tr>
+                            <tr>
+                                <td>Company Name</td>
+                                <td>{{model.visitedUser.company}}</td>
+                            </tr>
+                            <tr>
+                                <td>About Myself</td>
+                                <td><p>{{model.visitedUser.description}}</p></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        Connect with me on <a target="_blank" ng-src="{{model.visitedUser.facebooklink}}">
+                                <span class="fa fa-facebook"></span>Facebook</a> |
+                                <a target="_blank" ng-src="model.visitedUser.linkedin">
+                                    <span class="fa fa-linkedin"></span>LinkedIn</a>
+                    </div>
+                        </div>
+                    </div>
+                <div class="tab-pane fade in" id="tab2">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-lg-4 col-md-4" ng-repeat="event in model.visitedUserEvents">
+                            <div class="thumbnail">
+                                <img class="image-set" ng-src="{{event.eventImage}}">
+                                <div class="caption">
+                                    <h4 class="event-name">{{event.eventName}}</h4>
+                                </div>
+                                <div class="caption">
+                                    <h3 class="event-name"><a href="#/event/{{event.eventId}}">Book my Tickets</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="tab3">
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="user in model.following">
+                            <div class="profile-header-img member-profile">
+                                <img ng-if="user.url" class="img-circle" ng-src="{{user.url}}"/>
+                                <img ng-if="!user.url" class="img-circle"
+                                     ng-src="../../../img/project-images/user.png"/>
+                                <!-- badge -->
+                                <a class="member-profile" href="#/user/project/profile/{{user.username}}">{{user.username}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="tab4">
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="user in model.followers">
+                            <div class="profile-header-img member-profile">
+                                <img ng-if="user.url" class="img-circle" ng-src="{{user.url}}"/>
+                                <img ng-if="!user.url" class="img-circle"
+                                     ng-src="../../../img/project-images/user.png"/>
+                                <!-- badge -->
+                                <a class="member-profile" href="#/user/project/profile/{{user.username}}">{{user.username}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

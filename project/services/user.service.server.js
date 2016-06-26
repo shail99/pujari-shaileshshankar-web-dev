@@ -1,6 +1,6 @@
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 var multer = require('multer'); // npm install multer --save
@@ -10,15 +10,16 @@ module.exports = function (app, userModel, passport) {
 
     //var userModel = models.userModel;
     app.post ("/profile/uploads", upload.single('myFile'), uploadImage);
-    app.get("/auth/facebook", passport.authenticate('facebook'));
-    app.get("/auth/facebook/callback", passport.authenticate('facebook',{
-        successRedirect: '/assignment/#/user',
-        failureRedirect: '/assignment/#/login'
+    app.get("/auth/google", passport.authenticate('google',{ scope: ['profile','email'] }));
+    app.get("/auth/google/callback", passport.authenticate('google',{
+        successRedirect: '/project/#/',
+        failureRedirect: '/project/#/'
     }));
+    app.get("/project/api/user/:username",findUserByUsername);
     app.post("/api/user",createUser);
     app.get("/api/user", getUsers);
     app.post("/api/login",passport.authenticate('project'), login);
-    app.get("/api/user/:userId",findUserById);
+    app.get("/project/user/:userId",findUserById);
     app.put("/project/user/:userId",updateUser);
     app.delete("/api/user/:userId",deleteUser);
     app.post("/api/logout",logout);
@@ -29,13 +30,13 @@ module.exports = function (app, userModel, passport) {
 //    passport.serializeUser(serializeUser);
 //    passport.deserializeUser(deserializeUser);
 
-    var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    var googleConfig = {
+        clientID     : process.env.GOOGLE_CLIENT_ID,
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
 
-    passport.use('facebook',new FacebookStrategy(facebookConfig,facebookLogin));
+    passport.use(new GoogleStrategy(googleConfig,googleLogin));
 
     function localStrategy(username, password, done) {
         userModel
@@ -54,31 +55,41 @@ module.exports = function (app, userModel, passport) {
             );
     }
 
-    function facebookLogin(token, refreshToken, profile, done){
-        userModel
-            .findFacebookUser(profile.id)
-            .then(
-                function(facebookUser){
-                    if(facebookUser){
-                        return done(null,facebookUser);
-                    }else{
-                        facebookUser = {
-                            username: profile.displayName.replace(/ /g,''),
-                            facebook:{
-                                token: token,
-                                id: profile.id,
-                                displayName: profile.displayName
-                            }
+    function googleLogin(token, refreshToken, profile, done){
+            userModel
+                .findUserByGoogleId(profile.id)
+                .then(
+                    function(user) {
+                        if(user) {
+                            return done(null, user);
+                        } else {
+                            var email = profile.emails[0].value;
+                            var emailParts = email.split("@");
+                            var newGoogleUser = {
+                                username:  emailParts[0],
+                                firstName: profile.name.givenName,
+                                lastName:  profile.name.familyName,
+                                email:     email,
+                                google: {
+                                    id:    profile.id,
+                                    token: token
+                                }
+                            };
+                            return userModel.createUser(newGoogleUser);
                         }
+                    },
+                    function(err) {
+                        if (err) { return done(err); }
                     }
-                    userModel.createUser(facebookUser)
-                        .then(
-                            function(user){
-                                done(null, user);
-                            }
-                        );
-                }
-            )
+                )
+                .then(
+                    function(user){
+                        return done(null, user);
+                    },
+                    function(err){
+                        if (err) { return done(err); }
+                    }
+                );
     }
 
     function loggedIn(request, response){
@@ -149,7 +160,8 @@ module.exports = function (app, userModel, passport) {
             );
     }
 
-    function findUserByUsername(username,response){
+    function findUserByUsername(request,response){
+        var username = request.params.username;
         userModel
             .findUserByUsername(username)
             .then(

@@ -37,6 +37,15 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when("/user/project/profile/:username", {
+                templateUrl: "views/user/member-profile.view.client.html",
+                controller: "MemberProfileController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+        
     }
 
     function checkLoggedIn(UserService, $location, $q, $rootScope) {

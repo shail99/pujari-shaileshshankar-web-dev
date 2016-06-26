@@ -95,23 +95,6 @@ module.exports = function (app, userModel,passport) {
         response.json(user);
     }
 
-    function serializeUser(user, done) {
-        done(null, user);
-    }
-
-    function deserializeUser(user, done) {
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }
-
     function register(request, response){
         var user = request.body;
         userModel

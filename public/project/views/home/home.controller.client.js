@@ -75,7 +75,6 @@
                     vm.passwordError = "Passwords do not match!!!";
                 }
             }
-
         }
     }
 })();
