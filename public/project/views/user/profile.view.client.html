@@ -109,7 +109,7 @@
                 <form action="/profile/uploads" method="post" enctype="multipart/form-data">
                     Upload your profile picture
                     <input name="myFile" type="file" class="form-control"/>
-                    <input name="user" value="{{model.user}}" style="display: none"/>
+                    <input name="userId" value="{{model.user._id}}" style="display: none"/>
                     <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
                 </form>
             </div>

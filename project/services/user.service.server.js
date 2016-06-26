@@ -244,9 +244,8 @@ module.exports = function (app, userModel, passport) {
     }
 
     function uploadImage(request, response) {
-
-        console.log(request);
-        var userId        = request.user._id;
+        
+        var userId        = request.body.userId;
         console.log(userId);
         var myFile        = request.file;
 
@@ -258,23 +257,14 @@ module.exports = function (app, userModel, passport) {
             var size = myFile.size;
             var mimetype = myFile.mimetype;
 
+            var user = {
+                url : "/img-upload/" + filename
+            };
             userModel
-                .findUserById(userId)
+                .updateUser(userId,user)
                 .then(
-                    function(user){
-                        console.log(user);
-                        user.url = "/img-upload/" + filename;
-                        console.log(user);
-                        userModel
-                            .updateUser(userId,user)
-                            .then(
-                                function(success){
-                                    response.send(200);
-                                },
-                                function(error){
-                                    response.statusCode(404).send(error);
-                                }
-                            )
+                    function(success){
+                        response.send(200);
                     },
                     function(error){
                         response.statusCode(404).send(error);
