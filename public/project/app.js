@@ -35,10 +35,10 @@
                 .logout()
                 .then(
                     function(response){
-                        $location.url("/");
+                        $route.reload();
                     },
                     function(error){
-                        $location.url("/");
+                        $route.reload();
                     }
                 );
         }

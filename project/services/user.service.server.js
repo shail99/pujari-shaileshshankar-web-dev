@@ -4,7 +4,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 var multer = require('multer'); // npm install multer --save
-var upload = multer({ dest: __dirname+'/../../public/uploads' });
+var upload = multer({ dest: __dirname+'/../../public/img-upload' });
 
 module.exports = function (app, userModel, passport) {
 
@@ -263,7 +263,7 @@ module.exports = function (app, userModel, passport) {
                 .then(
                     function(user){
                         console.log(user);
-                        user.url = "/uploads/" + filename;
+                        user.url = "/img-upload/" + filename;
                         console.log(user);
                         userModel
                             .updateUser(userId,user)
