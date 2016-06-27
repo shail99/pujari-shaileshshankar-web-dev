@@ -251,15 +251,29 @@ module.exports = function (app,models) {
     function createUser(request,response){
         var user = request.body;
         userModel
-            .createUser(user)
+            .findUserByUsername(user.username)
             .then(
                 function(user){
-                    response.json(user);
+                    if(user){
+                        response.status(400).send("Username already in use");
+                    }else{
+                        request.body.password = bcrypt.hashSync(request.body.password);
+                        userModel
+                            .createUser(request.body)
+                            .then(
+                                function(user){
+                                    response.json(user);
+                                },
+                                function(error){
+                                    response.statusCode(400).send(error);
+                                }
+                            );
+                    }
                 },
                 function(error){
-                    response.statusCode(400).send(error);
+                    response.status(400).send(error);
                 }
-            );
+            )
     }
 
     function findUserByUsername(request,response){
