@@ -3,11 +3,24 @@
         .module("EventSmart")
         .controller("HomePageController", HomePageController);
 
-    function HomePageController($location, $anchorScroll, UserService, $rootScope, $route) {
+    function HomePageController($location, $anchorScroll, UserService, $rootScope, $route, $http) {
         var vm = this;
         vm.searchEvent = searchEvent;
         vm.login = login;
         vm.register = register;
+        vm.sendMail = sendMail;
+
+        function sendMail(mail, contactForm) {
+            if (contactForm.$valid) {
+                var url = "/api/mail";
+                $http.post(url, mail)
+                    .then(function (success) {
+                        vm.messageSuccess = "Message sent successfully!!!"
+                    }, function (error) {
+                        vm.messageError = "Not able to send the message. Please try again!!!"
+                    });
+            }
+        }
 
         function searchEvent(event, location, SearchEventForm) {
             if (SearchEventForm.$valid) {
@@ -28,8 +41,12 @@
                         function (response) {
                             var user = response.data;
                             if (user) {
-                                $route.reload();
-                                vm.LoginSuccess = "Login successfull"
+                                if (user.role === "user") {
+                                    $route.reload();
+                                    vm.LoginSuccess = "Login successfull"
+                                } else {
+                                    $location.url("/admin");
+                                }
                             }
                         },
                         function (error) {
@@ -43,35 +60,35 @@
         /*
          Handles the registration of a particular user in the controller
          */
-        function register(username,password,email,RegisterForm) {
+        function register(username, password, email, RegisterForm) {
             vm.RegisterSuccess = null;
             vm.RegisterError = null;
-            if(RegisterForm.$valid && RegisterForm.registerpassword.$modelValue === RegisterForm.verifypassword.$modelValue){
+            if (RegisterForm.$valid && RegisterForm.registerpassword.$modelValue === RegisterForm.verifypassword.$modelValue) {
                 var newUser = {
                     username: username,
                     password: password,
                     email: email,
                     firstName: "",
                     lastName: "",
-                    type: "member"
+                    type: "member",
+                    role: "user"
                 };
 
                 UserService
                     .register(newUser)
                     .then(
-                        function(response){
+                        function (response) {
                             var user = response.data;
                             vm.RegisterSuccess = "Registration successfull";
                             $route.reload();
                         },
-                        function(error){
+                        function (error) {
                             vm.RegisterError = error.data;
                         }
                     );
-            }else{
+            } else {
                 vm.error = "There are errors in the form";
-                if(RegisterForm.registerpassword.$modelValue !== RegisterForm.verifypassword.$modelValue)
-                {
+                if (RegisterForm.registerpassword.$modelValue !== RegisterForm.verifypassword.$modelValue) {
                     vm.passwordError = "Passwords do not match!!!";
                 }
             }

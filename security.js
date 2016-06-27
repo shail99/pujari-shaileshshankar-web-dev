@@ -13,7 +13,6 @@ module.exports = function (assignmentUserModel, projectUserModel) {
     var api = {
         getPassport: getPassport
     };
-
     return api;
 
     function assignmentLocalStrategy(username, password, done) {

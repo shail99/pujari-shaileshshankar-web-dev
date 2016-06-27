@@ -28,7 +28,7 @@
             </div>
             <div class="useravatar">
             </div>
-            <div ng-if="!model.userFollowing && model.username !== model.loggedInUser.username"
+            <div ng-if="!model.userFollowing && model.username !== model.loggedInUser.username && model.loggedInUser"
                  class="card-info">
                 <span class="card-title">
                     <a ng-click="model.followUser()"
@@ -36,7 +36,7 @@
                         <span class="glyphicon glyphicon-user"></span>  Follow Me</a>
                 </span>
             </div>
-            <div ng-if="model.userFollowing && model.username !== model.loggedInUser.username"
+            <div ng-if="model.userFollowing && model.username !== model.loggedInUser.username && model.loggedInUser"
                  class="card-info">
                 <span class="card-title">
                     <a ng-click="model.unFollowUser()"

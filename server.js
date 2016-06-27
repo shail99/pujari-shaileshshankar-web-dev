@@ -36,16 +36,17 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 }
 mongoose.connect(connectionString);
 
-var assignmentUserModel = require("./assignment/models/user/user.model.server.js")();
+/*var assignmentUserModel = require("./assignment/models/user/user.model.server.js")();
 var projectUserModel = require("./project/models/user/user.model.server.js")();
-var security = require("./security")(assignmentUserModel,projectUserModel);
-var passport = security.getPassport();
+var security = require("./security.js")(assignmentUserModel,projectUserModel);
+var passport = security.getPassport();*/
+
 
 var project = require("./project/app.js");
-project(app,projectUserModel,passport);
+project(app);
 
-var assignment = require("./assignment/app.js");
-assignment(app,assignmentUserModel,passport);
+//var assignment = require("./assignment/app.js");
+//assignment(app,assignmentUserModel,passport);
 
 var home = require("./home/app.js");
 home(app);

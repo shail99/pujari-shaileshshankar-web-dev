@@ -61,7 +61,6 @@ module.exports = function (app, models) {
             .findEventById(id)
             .then(
                 function(event){
-                    console.log(event);
                     response.json(event);
                 },
                 function (error) {

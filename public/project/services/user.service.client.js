@@ -17,7 +17,8 @@
             deleteUser : deleteUser,
             logout : logout,
             loggedIn : loggedIn,
-            register: register
+            register: register,
+            getUsers: getUsers
         }
 
         return api;
@@ -72,6 +73,11 @@
         function deleteUser(userId){
             var url = "/api/user/" + userId;
             return $http.delete(url);
+        }
+        
+        function getUsers(){
+            var url = "/api/user";
+            return $http.get(url);
         }
 
     }

@@ -1,6 +1,3 @@
-/*
-Will hold all the user related crud operations
- */
 module.exports = function () {
 
     var mongoose = require("mongoose");

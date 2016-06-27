@@ -33,7 +33,6 @@
                 .then(
                     function (response) {
                         vm.event = response.data;
-                        console.log(vm.event);
                     },
                     function (error) {
                         vm.eventError = "Unable to find the event. Try again later!!!"
@@ -117,25 +116,28 @@
             $location.url("/event/" + category + "/location/boston")
         }
 
-        function createComment(commentText) {
+        function createComment(commentText,commentForm) {
             $("#commentText").val('');
-            var comment = {
-                username: vm.user.username,
-                commentText: commentText,
-                url: vm.user.url,
-                eventId: vm.eventId
-            };
+            if (commentForm.$valid) {
+                var comment = {
+                    username: vm.user.username,
+                    commentText: commentText,
+                    url: vm.user.url,
+                    eventId: vm.eventId,
+                    eventRating: vm.rating
+                };
 
-            CommentService
-                .createComment(comment)
-                .then(
-                    function (comment) {
-                        init();
-                    },
-                    function (error) {
-                        vm.commentError = "Not able to post the comment!!! Try again later"
-                    }
-                )
+                CommentService
+                    .createComment(comment)
+                    .then(
+                        function (comment) {
+                            init();
+                        },
+                        function (error) {
+                            vm.commentError = "Not able to post the comment!!! Try again later"
+                        }
+                    )
+            }
         }
 
         function unLikeEvent() {
@@ -192,7 +194,6 @@
                             .then(
                                 function (response) {
                                     var user = response.data;
-                                    console.log(user);
                                     user.eventsLiked.push(event);
                                     return UserService.updateUser(vm.user._id, user);
                                 }
@@ -204,7 +205,7 @@
                 )
                 .then(
                     function (success) {
-                        $route.reload();
+                        init();
                     },
                     function (error) {
                         vm.error = "Unable to save the event!!"

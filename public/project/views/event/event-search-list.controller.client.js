@@ -15,7 +15,6 @@
                 .then(
                     function(response){
                         vm.categories = response.data.categories;
-                        console.log(vm.categories);
                     },
                     function(error){
                         vm.categories=[];
@@ -26,7 +25,6 @@
                 .then(
                     function(events){
                         vm.events = events.data.events;
-                        console.log(vm.events);
                     },
                     function(error){
                         vm.error = "Search did not match any results!!!"

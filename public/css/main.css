@@ -257,7 +257,6 @@ h2 {
 **************************/
 
 #explore {
-  background-color: #080808;
   background-position: center bottom;
   background-size: contain;
   background-repeat:no-repeat;
@@ -276,6 +275,7 @@ h2 {
   font-size: 42px;
   text-transform: uppercase;
   text-align: center;
+  color: honeydew;
 }
 
 #countdown {
@@ -435,6 +435,7 @@ h2 {
   font-size: 18px;
   font-weight: 100;
   display: block;
+  color: whitesmoke;
 }
 
 #event-carousel {
@@ -463,10 +464,10 @@ h2 {
 **************************/
 
 #about {
-  background-color: #75B46E;  
   position: relative;  
   width: 100%;
   display: flex;
+  background-image: url("../img/project-images/guitar.jpg");
 }
 
 .guitar2 {
@@ -480,7 +481,7 @@ h2 {
 
 .about-content {
   width: 50%;
-   background-image: url("../img/project-images/about-bg.jpg");
+
   background-position: left bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -490,11 +491,13 @@ h2 {
 
 #about h2 {
   margin-bottom: 23px;
+  color: honeydew;
 }
 
 .about-content p {
   font-size: 17px;
   font-family: 'Dosis',sans-serif;
+  color: honeydew;
 }
 
 #about .btn-primary {
@@ -767,4 +770,18 @@ span.error{
   width: 30px;
   height: 40px
 }
+.admin-table {
+  background-color: #bbbbbb;
+}
 
+/*************************
+******Login CSS****
+**************************/
+
+#login h2{
+  color: white;
+}
+
+#login label{
+  color: white;
+}

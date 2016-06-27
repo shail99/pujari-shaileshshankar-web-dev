@@ -13,6 +13,7 @@ module.exports = function () {
             id: String,
             displayName: String
         },
+        role: String,
         url: String,
         lastName: String,
         linkedin: String,
@@ -22,7 +23,7 @@ module.exports = function () {
         date: String,
         description: String,
         email: String,
-        type: String,
+        type: {type: String, default: 'member'},
         dateCreated: {type: Date, default: Date.now},
         eventsLiked: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
     }, {collection: "project.user"});

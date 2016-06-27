@@ -30,7 +30,7 @@ module.exports = function (app, models) {
                     response.json(user);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    response.send(error);
                 }
             )
     }

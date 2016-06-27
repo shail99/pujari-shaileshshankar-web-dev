@@ -14,6 +14,8 @@ module.exports = function () {
         findUserByUsername: findUserByUsername,
         updateUser: updateUser,
         deleteUser: deleteUser,
+        //findFacebookUser: findFacebookUser,
+        findAllUsers : findAllUsers,
         findUserByGoogleId: findUserByGoogleId
     };
     return api;
@@ -44,6 +46,10 @@ module.exports = function () {
             .update({_id: userId},{
                 $set: newUser
             })
+    }
+
+    function findAllUsers(){
+        return UserInfo.find({role: "user"});
     }
 
     function deleteUser(userId){

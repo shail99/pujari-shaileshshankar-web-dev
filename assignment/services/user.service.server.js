@@ -21,10 +21,6 @@ module.exports = function (app, userModel,passport) {
     app.get("/api/loggedIn", loggedIn);
     app.post("/api/register", register);
 
-//    passport.use(new LocalStrategy(localStrategy));
-//    passport.serializeUser(serializeUser);
-//    passport.deserializeUser(deserializeUser);
-
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,

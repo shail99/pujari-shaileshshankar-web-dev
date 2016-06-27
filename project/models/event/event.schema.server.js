@@ -1,7 +1,3 @@
-/*
-describe how all the users look like
- */
-
 module.exports = function () {
     var mongoose = require("mongoose");
     var EventSchema = mongoose.Schema({

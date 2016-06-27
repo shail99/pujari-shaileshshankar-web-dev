@@ -30,10 +30,11 @@
             return $http.get(url);
         }
         function getEvents(event,location) {
-            var urlBase = "https://www.eventbriteapi.com/v3/events/search/?q=SEARCH_TEXT&token=TOKEN";
+            var urlBase = "https://www.eventbriteapi.com/v3/events/search/?q=SEARCH_TEXT&location.address=MY_LOCATION&token=TOKEN";
             var url = urlBase
                 .replace("TOKEN", token)
-                .replace("SEARCH_TEXT", event);
+                .replace("SEARCH_TEXT", event)
+                .replace("MY_LOCATION", location);
             return $http.get(url);
         }
         function getEventbyId(eventId) {

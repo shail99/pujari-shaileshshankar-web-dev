@@ -3,7 +3,7 @@
         .module("EventSmart")
         .controller("MemberProfileController", MemberProfileController);
 
-    function MemberProfileController(EventService, UserService, $route, $routeParams, $location, $rootScope, MemberProfileService,$anchorScroll) {
+    function MemberProfileController(EventService, UserService, $route, $routeParams, $location, $rootScope, MemberProfileService, $anchorScroll) {
         var vm = this;
         vm.eventByCategory = eventByCategory;
         vm.loggedInUser = $rootScope.currentUser;
@@ -14,8 +14,8 @@
 
         init();
         function init() {
-            vm.following=[];
-            vm.followers=[];
+            vm.following = [];
+            vm.followers = [];
             vm.visitedUserEvents = [];
             vm.userFollowing = false;
 
@@ -29,29 +29,31 @@
                     }
                 );
 
-            MemberProfileService
-                .findUserByUsername(vm.loggedInUser.username)
-                .then(
-                    function(response){
-                        var user = response.data;
-                        if(user){
-                            vm.followedUser = user.followedUser;
-                            for(var i in vm.followedUser){
-                                if(vm.followedUser[i] === vm.username){
-                                    vm.userFollowing = true;
+            if (vm.loggedInUser) {
+                MemberProfileService
+                    .findUserByUsername(vm.loggedInUser.username)
+                    .then(
+                        function (response) {
+                            var user = response.data;
+                            if (user) {
+                                vm.followedUser = user.followedUser;
+                                for (var i in vm.followedUser) {
+                                    if (vm.followedUser[i] === vm.username) {
+                                        vm.userFollowing = true;
+                                    }
                                 }
-                            }
 
+                            }
                         }
-                    }
-                );
+                    );
+            }
 
             MemberProfileService
                 .findUserByUsername(vm.username)
                 .then(
-                    function(response){
+                    function (response) {
                         var user = response.data;
-                        if(user) {
+                        if (user) {
                             for (var i in user.followedUser) {
                                 UserService
                                     .findUserByUsername(user.followedUser[i])
@@ -68,19 +70,19 @@
             // Getting followers for a visted profile
             MemberProfileService.findAllUsers()
                 .then(
-                    function(response){
+                    function (response) {
                         var userList = response.data;
-                        for(var u in userList){
-                            for(var l in userList[u].followedUser){
-                                if(userList[u].followedUser[l] === vm.username){
+                        for (var u in userList) {
+                            for (var l in userList[u].followedUser) {
+                                if (userList[u].followedUser[l] === vm.username) {
                                     UserService
                                         .findUserByUsername(userList[u].username)
                                         .then(
                                             function (response) {
                                                 vm.followers.push(response.data);
                                             },
-                                            function(error){
-                                                vm.followers=[];
+                                            function (error) {
+                                                vm.followers = [];
                                             }
                                         )
                                 }
@@ -94,7 +96,6 @@
                     function (response) {
                         vm.visitedUser = response.data;
                         for (var e in vm.visitedUser.eventsLiked) {
-                            console.log(vm.visitedUser.eventsLiked[e])
                             EventService.findEventByIdFromDb(vm.visitedUser.eventsLiked[e])
                                 .then(
                                     function (response) {
@@ -105,8 +106,6 @@
                                     }
                                 )
                         }
-
-                        console.log(vm.visitedUserEvents);
                     },
                     function (error) {
                         vm.visitedUserError = "Not able to view the user profile!!!"
@@ -128,22 +127,22 @@
             $location.url("/event/" + category + "/location/boston")
         }
 
-        function unFollowUser(){
+        function unFollowUser() {
             MemberProfileService
                 .findUserByUsername(vm.loggedInUser.username)
                 .then(
-                    function(response){
+                    function (response) {
                         var user = response.data;
-                        if(user){
-                            for(var i in user.followedUser){
-                                if(user.followedUser[i] === vm.username){
-                                    user.followedUser.splice(i,1);
+                        if (user) {
+                            for (var i in user.followedUser) {
+                                if (user.followedUser[i] === vm.username) {
+                                    user.followedUser.splice(i, 1);
                                 }
                             }
                             MemberProfileService
-                                .updateUser(user._id,user)
+                                .updateUser(user._id, user)
                                 .then(
-                                    function(success){
+                                    function (success) {
                                         init();
                                     },
                                     function (error) {
@@ -152,7 +151,7 @@
                                 );
                         }
                     },
-                    function(error){
+                    function (error) {
                         init();
                     }
                 )
@@ -168,7 +167,7 @@
                         user = response.data;
                         if (user) {
                             user.followedUser.push(vm.username);
-                            MemberProfileService.updateUser(user._id,user)
+                            MemberProfileService.updateUser(user._id, user)
                                 .then(
                                     function (success) {
                                         init();
@@ -186,10 +185,10 @@
 
                             MemberProfileService.createUser(user)
                                 .then(
-                                    function(success){
+                                    function (success) {
                                         init();
                                     },
-                                    function(error){
+                                    function (error) {
                                         init();
                                     }
                                 );

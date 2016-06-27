@@ -5,7 +5,7 @@
 // (function(){})();
 (function () {
     angular
-        .module("EventSmart", ["ngRoute"])
+        .module("EventSmart", ["ngRoute","ngRating"])
         .controller("IndexController", IndexController);
 
 
@@ -16,9 +16,8 @@
         vm.searchEvent = searchEvent;
         
         function searchEvent(eventName,SearchEventForm) {
-            if (SearchEventForm.$valid) {
+            if($('#srch-term').val() != "")
                 $location.url("/event/" + eventName + "/location/boston");
-            }
         }
 
         function scrollTo(id) {
@@ -35,9 +34,11 @@
                 .logout()
                 .then(
                     function(response){
+                        $location.url("/");
                         $route.reload();
                     },
                     function(error){
+                        $location.url("/");
                         $route.reload();
                     }
                 );

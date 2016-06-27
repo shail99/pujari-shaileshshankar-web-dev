@@ -4,7 +4,7 @@
 
         <div class="col-md-3">
             <p class="lead"></p>
-            <div class="list-group">
+            <div class="list-group hidden-xs">
                 <a ng-repeat="category in model.categories"
                    ng-click="model.eventByCategory(category.name)"
                    class="list-group-item">{{category.name}}</a>
@@ -16,7 +16,7 @@
                 <div class="caption-full">
                     <h2><a class="title" href="">{{model.event.name.text}}</a></h2>
                     <img class="img-responsive pull-right event-detail" ng-src="{{model.event.logo.url}}" alt="">
-                    </div>
+                </div>
                 <div class="caption-full">
                     <div class="event-detail" ng-bind-html="model.getSafeHtml(model.event.description.html)"></div>
                 </div>
@@ -31,8 +31,10 @@
             </div>
 
             <h2 class="page-header"><span class="fa fa-comments"></span>Comments
-                <a ng-click="model.saveEvent()" ng-if="model.user && !model.savedEvent" class="pull-right"><span class="fa fa-thumbs-up"></span>Save Event</a>
-                <a ng-click="model.unLikeEvent()" ng-if="model.user && model.savedEvent" class="pull-right"><span class="fa fa-thumbs-down"></span>Unlike</a>
+                <a ng-click="model.saveEvent()" ng-if="model.user && !model.savedEvent" class="pull-right"><span
+                        class="fa fa-thumbs-up"></span>Save Event</a>
+                <a ng-click="model.unLikeEvent()" ng-if="model.user && model.savedEvent" class="pull-right"><span
+                        class="fa fa-thumbs-down"></span>Unlike</a>
             </h2>
 
             <section class="comment-list">
@@ -40,48 +42,54 @@
                 <article ng-repeat="comment in model.comments" class="row">
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <figure class="thumbnail">
-                            <img ng-if="comment.url" class="img-responsive" ng-src="{{comment.url}}" />
-                            <img ng-if="!comment.url" class="img-responsive" ng-src="../../../img/project-images/user.png" />
+                            <img ng-if="comment.url" class="img-responsive" ng-src="{{comment.url}}"/>
+                            <img ng-if="!comment.url" class="img-responsive"
+                                 ng-src="../../../img/project-images/user.png"/>
                         </figure>
                     </div>
                     <div class="col-md-10 col-sm-10 col-xs-10">
                         <div class="panel panel-default arrow left">
                             <div class="panel-body">
-                                <a ng-if="model.user.username === comment.username"
+                                <a ng-if="model.user.username === comment.username || model.user.role === 'admin'"
                                    class="pull-right"
                                    ng-click="model.removeComment(comment._id)"><span class="fa fa-trash"></span></a>
                                 <header class="text-left">
-                                    <div class="comment-user"><a ng-click="model.visitProfile(comment.username)"><i class="fa fa-user"></i><strong>{{comment.username}}</strong></a></div>
-                                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> <strong>{{comment.dateCreated}}</strong></time>
+                                    <div class="comment-user"><a ng-click="model.visitProfile(comment.username)"><i
+                                            class="fa fa-user"></i><strong>{{comment.username}}</strong></a></div>
+                                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>
+                                        <strong>{{comment.dateCreated}}</strong></time>
                                 </header>
                                 <div class="comment-post">
                                     <p>{{comment.commentText}}</p>
+                                    <ng-rating ng-model="comment.eventRating"></ng-rating>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </article>
-                </section>
+                </article>
+            </section>
 
             <div class="widget-area no-padding blank">
-                        <div class="status-upload">
-                            <form name="commentForm">
+                <div class="status-upload">
+                    <form name="commentForm" novalidate>
                                 <textarea name="comment"
                                           id="commentText"
                                           ng-model="commentText"
                                           required
-                                          placeholder="Your comments are valuable....." ></textarea>
-                                <button ng-click="model.createComment(commentText)"
-                                   id="commentButton"
-                                   class="btn btn-success green">
-                                    <i class="fa fa-comment"></i> Comment
-                                </button>
-                            </form>
-                        </div><!-- Status Upload  -->
+                                          placeholder="Your comments are valuable....."></textarea>
+
+                        <button ng-click="model.createComment(commentText,commentForm)"
+                                id="commentButton"
+                                class="btn btn-success green">
+                            <i class="fa fa-comment"></i> Comment
+                        </button>
+                        <ng-rating editable="true"
+                                   ng-model="model.rating">
+                        </ng-rating>
+                    </form>
+                </div><!-- Status Upload  -->
             </div><!-- Widget Area -->
         </div>
-
-
     </div>
 
 </div>

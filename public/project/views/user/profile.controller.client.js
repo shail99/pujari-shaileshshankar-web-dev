@@ -8,8 +8,7 @@
         vm.user = $rootScope.currentUser;
         vm.updateUser = updateUser;
         vm.getProfileImage = getProfileImage;
-
-        console.log(vm.user);
+        
         function init(){
             UserService
                 .findUserById(vm.user._id)
@@ -28,7 +27,6 @@
         }
 
         function updateUser(updatedUser) {
-            console.log(updatedUser);
             UserService
                 .updateUser(vm.user._id, updatedUser)
                 .then(
