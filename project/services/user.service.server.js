@@ -25,12 +25,6 @@ module.exports = function (app,models) {
     app.get("/api/loggedIn", loggedIn);
     app.post("/api/register", register);
 
-    /*app.get("/auth/facebook", passport.authenticate('facebook'));
-    app.get("/auth/facebook/callback", passport.authenticate('facebook',{
-        successRedirect: '/project/#',
-        failureRedirect: '/project/#'
-    }));*/
-
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get('/auth/google/callback',
         passport.authenticate('google', {
@@ -43,14 +37,6 @@ module.exports = function (app,models) {
         clientSecret : process.env.GOOGLE_CLIENT_SECRET,
         callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
-
-    /*var facebookConfig = {
-        clientID     : process.env.FACEBOOK1_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK1_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK1_CALLBACK_URL
-    };*/
-
-    /*passport.use('facebook',new FacebookStrategy(facebookConfig,facebookLogin));*/
 
     passport.use('project', new LocalStrategy(projectLocalStrategy));
     passport.serializeUser(serializeUser);
@@ -105,39 +91,6 @@ module.exports = function (app,models) {
                 );
         }
     }
-    /*function facebookLogin(token, refreshToken, profile, done){
-        userModel
-            .findFacebookUser(profile.id)
-            .then(
-                function(facebookUser){
-                    if(facebookUser){
-                        return done(null,facebookUser);
-                    }else{
-                        facebookUser = {
-                            username: profile.displayName.replace(/ /g,''),
-                            facebook:{
-                                token: token,
-                                id: profile.id,
-                                displayName: profile.displayName
-                            }
-                        }
-                    }
-                    userModel.createUser(facebookUser)
-                        .then(
-                            function(user){
-                                return done(null, user);
-                            },
-                            function(error){
-                                return done(error);
-                            }
-                        );
-                },
-                function(error){
-                    if(error)
-                        return done(error);
-                }
-            )
-    }*/
 
     function googleStrategy(token, refreshToken, profile, done) {
         userModel

@@ -2,6 +2,11 @@
 <h1 class="page-header">Admin</h1>
 <h2 class="sub-header">User Management</h2>
 <div class="admin-table table-responsive">
+
+    <div ng-if="model.error" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Error!!! </strong> {{model.error}}
+    </div>
     <table class="table table-bordered table-striped">
         <thead>
         <tr class="theadrow">

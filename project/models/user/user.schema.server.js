@@ -13,7 +13,7 @@ module.exports = function () {
             id: String,
             displayName: String
         },
-        role: String,
+        role: {type: String, default: 'user'},
         url: String,
         lastName: String,
         linkedin: String,

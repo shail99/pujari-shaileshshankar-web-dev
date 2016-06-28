@@ -20,7 +20,6 @@
                 .then(
                     function (response) {
                         vm.users = response.data;
-                        console.log(vm.users);
                         vm.inputUser = {};
                         vm.selected = -1;
                     },
@@ -63,14 +62,13 @@
 
         function callSuccess(response){
             vm.users = response.data;
-            console.log(vm.users);
             vm.inputUser = {};
             vm.selected = -1;
             init();
         }
 
         function callError(error){
-            vm.error = error;
+            vm.error = error.data;
         }
 
     }
