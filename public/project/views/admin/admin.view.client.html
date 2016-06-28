@@ -29,7 +29,6 @@
             </th>
             <th>Roles</th>
             <th>Email</th>
-            <th>Employment Status</th>
         </tr>
         </thead>
         <tbody>
@@ -62,16 +61,6 @@
                        ng-model="model.inputUser.email">
             </td>
             <td>
-                <select ng-model="model.inputUser.employed"
-                        class="form-control"
-                        id="employed">
-                    <option value="" selected disabled>Select Employment Status</option>
-                    <option value="Student">Student</option>
-                    <option value="Self-Employed">Self-Employed</option>
-                    <option value="Service">Service</option>
-                </select>
-            </td>
-            <td>
                 <a href="" ng-click="model.add(model.inputUser)"
                    ng-show="model.selected == -1"><span
                         class="glyphicon glyphicon-plus plusicon pull-left" aria-hidden="true"></span>
@@ -89,7 +78,6 @@
             <td>{{u.lastName}}</td>
             <td>{{u.role}}</td>
             <td>{{u.email}}</td>
-            <td>{{u.employed}}</td>
             <td>
                 <a href="" ng-click="model.remove(u)"><span
                         class="glyphicon glyphicon-remove removeicon pull-left"
